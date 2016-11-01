@@ -1,5 +1,7 @@
 #include "Msgs.h"
 
+static HardwareSerial *serials[4] = {&Serial, &Serial1, &Serial2, &Serial3};
+
 service_t _serviceTable[NO_OF_SERVICES];
 
 Msgs::Msgs() {
@@ -9,6 +11,7 @@ Msgs::Msgs() {
 void Msgs::sendMessage(message_t *msg) {
 	// pack message and write to msg->to->port
     Serial.println(msg->to->name);
+    serials[msg->to->port].print(msg);
 }
 
 
