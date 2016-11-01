@@ -1,4 +1,10 @@
-#include "msgs.h"
+/* Arduino sketch for testing messages. To run, set your 
+ * sketchbook folder (in preferences) to the parent directory 
+ * (rover16/mpq), or copy the Msgs library to the library 
+ * folder of your sketchbook. 
+ */
+
+#include <Msgs.h>
 
 service_t a = {1, "srv1", 1, 1};
 service_t b = {2, "srv2", 2, 0};

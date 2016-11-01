@@ -1,6 +1,6 @@
-#include "msgs.h"
+#include "Msgs.h"
 
-service_t serviceTable[NO_OF_SERVICES];
+service_t _serviceTable[NO_OF_SERVICES];
 
 Msgs::Msgs() {
   

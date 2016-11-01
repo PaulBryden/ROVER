@@ -7,21 +7,18 @@
 
 typedef unsigned short int uint_t;
 
-typedef struct
-{
+typedef struct {
   uint_t id : 8;
   char *name;
   uint_t port : 2;
   uint_t dist : 4;
 } service_t;
 
-typedef struct
-{
+typedef struct {
   service_t *from;
   service_t *to;
   char *content;
 } message_t;
-
 
 class Msgs {
   public:
@@ -29,7 +26,7 @@ class Msgs {
     void readMessage(message_t *m);
     void sendMessage(message_t *m);
   private:
-    service_t *serviceTable;
+    service_t *_serviceTable;
 };
 
 #endif
