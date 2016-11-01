@@ -3,8 +3,8 @@ typedef unsigned short int uint_t;
 
 typedef struct
 {
-	unsigned char sizeOfPacket : 6;
-	unsigned char flags : 5;
+	unsigned char startByte : 8;
+	unsigned char flags : 3;
 	unsigned char messageID : 5;
 	unsigned char targetService;
 	unsigned char sourceService;
@@ -16,8 +16,8 @@ typedef struct
 typedef struct
 {
 	unsigned char numOfPacketsInMessage;
-	unsigned char typeOfMessage : 3;
-	
+	unsigned char typeOfMessage : 5;
+unsigned char typeOfMessage : 3;
 } message_header_t
 
 typedef struct
@@ -39,21 +39,17 @@ typdef struct{
 	
 } example_packet_t
 
-char *create_message(unsigned char targetService, unsigned char sourceService, char *dataContent, unsigned int sizeOfData){
+char *create_message(unsigned char targetService, unsigned char sourceService, char *dataContent, char messageType){
 	/**DO malloc and crc calculation, and header population here.
-	return pointer to memory location containing packet data.
-	first 6 bits can be extracted to determine packet size**/
+return pointer to memory location containing packet data. It is then message passing’s responsibility to send the data off.
+	**/
 	return 0;
 }
 
 example_packet_t parse_raw_message(char *rawMessage){
-	/**extract raw packet data from pointer and populate fields.**/
+	/**extract raw packet data from pointer and populate fields.
+Also execute relevant function based on parsed data, and pass relevant data to it.**/
 	return 0;
 }
 
-
-
-void sendMessage(message_t *msg) {
-	// pack message and write to msg->to->port
-}
 
