@@ -2,11 +2,12 @@
 #define Msgs_h
 
 #include "Arduino.h"
+#include <string>
 
 #define NO_OF_SERVICES 256
 
 typedef unsigned short int uint_t;
-
+/*
 typedef struct {
   uint_t id : 8;
   char *name;
@@ -19,14 +20,36 @@ typedef struct {
   service_t *to;
   char *content;
 } message_t;
+*/
+class Service {
+    uint_t id;
+    string name;
+    uint_t port;
+    uint_t dist;
+  public:
+    Service(uint_t id, string name, uint_t port, uint_t dist);
+};
+
+class Message {
+  Service from;
+  Service to;
+  string content;
+public:
+  Message();
+};
 
 class Msgs {
   public:
     Msgs();
-    void readMessage(message_t *m);
-    void sendMessage(message_t *m);
+    void readMessage(Message m);
+    bool sendMessage(Message m);
   private:
-    service_t *_serviceTable;
+    Service[] _serviceTable;
+    Packet[] messageToPackets(Message m);
+    Packet createPacket(char[] content);
+    bool sendPacket(Packet p);
+    char* serialisePacket(Packet p);
+    bool writePacketToSerial(char[] p);
 };
 
 #endif
