@@ -25,16 +25,14 @@ typedef struct
 {
 	packet_header_t packetHeader;
 	message_header_t messageHeader;
-	unsigned char *dataContent;
-	unsigned char terminationByte : 8;
+	unsigned char dataContent[];
 	
 } packet_message;
 
 typedef struct
 {
 	packet_header_t packetHeader;
-	message_header_t messageHeader;
-	unsigned char *dataContent;
+	unsigned char dataContent[0];
 	
 } packet_packet;
 
