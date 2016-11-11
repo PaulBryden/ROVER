@@ -19,9 +19,11 @@ If you're not confident with git, here's a good course: https://www.udacity.com/
 
 Here is the directory structure of the repo:
 
-- reqs contains requirements doucments
+- reqs contains requirements documents
 - notes contains copies of notes taken during meetings
-- mpq contains code for message passing and queueing
+- comms contains the most up-to-date version of the Arduino Comms library
+- documentation contains UML diagrams etc.
+- mpq contains dev code for message passing and queueing
 - resources.docx contains all of the links Paul puts on Facebook
 
 Up-to-date version of the Gantt chart can be found here: 
