@@ -26,6 +26,8 @@ Here is the directory structure of the repo:
 - admin/notes contains copies of notes taken during meetings
 - admin/resources.docx contains all of the links Paul puts on Facebook
 - arduino contains the most up-to-date version of the Arduino libraries and sketches
+- code contains any other code which is being used for development (e.g. old code, example code, code which is too buggy 
+			to add to the library, etc.)
 
 In order to work on Arduino code in the Arduino IDE, you should set the arduino directory as your sketchbook directory in 
 the IDE preferences. Otherwise you will not be able to #include the library files.
