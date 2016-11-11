@@ -2,9 +2,9 @@ This repository is for all software team related stuff, including code and organ
 
 Here is our branching structure:
 
-master - our release branch: you can't push to this
-admin - a branch for adding documentation files etc.
-develop - the most up to date version of our software
+- master: our release branch: you can't push to this
+- admin: a branch for adding documentation files etc.
+- develop: the most up to date version of our software
 
 When you do any work, you should:
 
@@ -19,12 +19,16 @@ If you're not confident with git, here's a good course: https://www.udacity.com/
 
 Here is the directory structure of the repo:
 
-- reqs contains requirements documents
-- notes contains copies of notes taken during meetings
-- comms contains the most up-to-date version of the Arduino Comms library
-- documentation contains UML diagrams etc.
-- mpq contains dev code for message passing and queueing
-- resources.docx contains all of the links Paul puts on Facebook
+- docs contains all code documentation
+- docs/reqs contains requirements documents
+- docs/uml contains UML diagrams
+- admin contains administration documents such as the Gantt chart
+- admin/notes contains copies of notes taken during meetings
+- admin/resources.docx contains all of the links Paul puts on Facebook
+- arduino contains the most up-to-date version of the Arduino libraries and sketches
+
+In order to work on Arduino code in the Arduino IDE, you should set the arduino directory as your sketchbook directory in 
+the IDE preferences. Otherwise you will not be able to #include the library files.
 
 Up-to-date version of the Gantt chart can be found here: 
 https://app.ganttpro.com/shared/token/63cc6f406f1354dc090faf8d852b37b043d804f53dbf99441e7f3a6c9c081e6f
