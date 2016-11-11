@@ -1,0 +1,22 @@
+
+* Number of bits for packet size
+* Expects response flag
+* Last packet
+* Special msg type for RD, or designate address for all nodes?
+* CRC
+* Behaviour on failure?
+* RD: Multiple paths, flags?
+
+Mechanical: 9cm/sec likely top speed
+
+
+|_ _ _ _1_ _ _ _|_ _ _ _2_ _ _ _|_ _ _ _3_ _ _ _|_ _ _ _4_ _ _ _|_ _ _ _5_ _ _ _|_ _ _ _6_ _ _ _|
+|size (6)   |flags (5)|msg (5)  |target(8)      |source (8)     |packet (8)     |crc (8)        |
+
+size (6 bits): size of packet in bytes (0 for 64 bytes)
+flags (5 bits): bit field for packet flags, such as prioritise, expects response, delivery failed... remaining bits are reserved for future use
+msg (5 bits): message id, used to make sure packets are matched up correctly
+target (8 bits): target service id
+source (8 bits): source service id
+packet (8 bits): packet number
+crc (8 bits): crc-8 code
