@@ -17,7 +17,7 @@ packetTest->messageHeader.numOfPacketsInMessage=0x01;
 packetTest->messageHeader.typeOfMessage=0x00;
 packetTest->messageHeader.messageBitfields=0x00;
 packetTest->dataContent[0]= 0xF1;
-for (int i = 1; i < (54); ++i){
+for (int i = 1; i < (((64-2)-8)-1); ++i){
 	packetTest->dataContent[i]=0;
 }
  unsigned char *  px = (unsigned char*)packetTest;
