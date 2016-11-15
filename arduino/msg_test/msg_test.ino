@@ -1,10 +1,9 @@
 /* Arduino sketch for testing messages. To run, set your 
  * sketchbook folder (in preferences) to the parent directory 
- * (rover16/mpq), or copy the Msgs library to the library 
+ * (rover16/arduino), or copy the Comms library to the library 
  * folder of your sketchbook. 
  */
 
-#include "Comms/Types.h"
 #include <Comms.h>
 
 Comms comms;
