@@ -1,15 +1,16 @@
 #ifndef PacketHandler_h
 #define PacketHandler_h
-
+#include "Types.h"
+#include "Port.h"
 class PacketHandler {
 
 
 public:
-	packet_t createPacket();
+	packet_t createPacket(byte flags,byte messageID, byte packetID, byte targetService, byte sourceService, byte dataContent[]);
 
-	void sendPacket(packet_t p);
+	void sendPacket(packet_t p, Port port);
 
-	void crcCheck(packet_t p);
+	bool crcCheck(packet_t p);
 
 	byte calculateCrc(packet_t p);
 };

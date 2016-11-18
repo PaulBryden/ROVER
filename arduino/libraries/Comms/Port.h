@@ -9,7 +9,7 @@ class Port {
 public:
 	void read();
 
-	void write();
+	void write(vector<char> serializedPacket);
 
 	packet_t getPacketFromBuffer();
 

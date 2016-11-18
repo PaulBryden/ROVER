@@ -4,7 +4,7 @@ void Port::read() {
 	// TODO - implement Port::read
 }
 
-void Port::write() {
+void Port::write(vector<char> serializedPacket) {
 	// TODO - implement Port::write
 }
 

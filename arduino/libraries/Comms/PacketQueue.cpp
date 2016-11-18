@@ -1,4 +1,5 @@
 #include "PacketQueue.h"
+#include "Types.h"
 
 void PacketQueue::addPacket(packet_t p) {
 	// TODO - implement PacketQueue::addPacket
