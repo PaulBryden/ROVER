@@ -1,6 +1,7 @@
 #ifndef Types_h
 #define Types_h
 
+using namespace std;
 
 typedef unsigned char byte;
 

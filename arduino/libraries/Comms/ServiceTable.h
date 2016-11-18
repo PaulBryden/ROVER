@@ -2,15 +2,17 @@
 #define ServiceTable_h
 
 #include "Service.h"
+#include <iterator>
+#include <map>
 
 class ServiceTable {
 
 private:
-	std::map<byte, Service> _table;
+	map<byte, Service*> _table;
 
 public:
 	ServiceTable();
-	Service getService(byte id);
+	Service* getService(byte id);
 	void addService(Service s);
 	void mergeTable(ServiceTable t);
 };

@@ -2,12 +2,14 @@
 #define Message_h
 
 #include "Types.h"
+#include <iterator>
+#include <vector>
 
 class Message {
 
 
 public:
-	packet_t[] toPackets();
+	vector<packet_t> toPackets();
 
 	void readMessage();
 };

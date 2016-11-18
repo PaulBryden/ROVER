@@ -1,6 +1,6 @@
 #include "Message.h"
 
-packet_t[] Message::toPackets() {
+vector<packet_t> Message::toPackets() {
 	// TODO - implement Message::toPackets
 }
 

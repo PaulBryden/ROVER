@@ -29,14 +29,11 @@ void PacketHandler::sendPacket(packet_t p, Port port) {
 	serializedPacket.push_back (0xFE); //ADD START BYTE
 	
 	for( int index=0; index<size; index++){
-		if (b[index]!=0xFE){
+		serializedPacket.push_back (b[index]);
+		if (b[index]==0xFE){
 			serializedPacket.push_back (0xFE);
-			serializedPacket.push_back (0xFE);
-		}else if(b[index]!=0xFF){
+		}else if(b[index]==0xFF){
 			serializedPacket.push_back (0xFF);
-			serializedPacket.push_back (0xFF);
-		}else{
-			serializedPacket.push_back (b[index]);
 		}
 	}
 	

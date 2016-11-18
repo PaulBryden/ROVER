@@ -2,19 +2,29 @@
 #define Service_h
 
 #include "Port.h"
+#include <iterator>
 #include <map>
+#include <string>
+
+struct PortComparator
+{
+   bool operator() (const Port& lhs, const Port& rhs) const
+   {
+       return lhs.id < rhs.id;
+   }
+};
 
 class Service {
 
 private:
 	byte _id;
-	String _name;
-	std::map<Port, int> _portMap;
+	string _name;
+	map<Port, int, PortComparator> _portMap;
 
 public:
-	Service(byte id, String name);
+	Service(byte id, string name);
 	byte getId();
-	String getName();
+	string getName();
 	Port getOutgoingPort();
 	void setPortDistance(Port port, int distance);
 };
