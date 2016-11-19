@@ -35,6 +35,11 @@
 
 __STL_BEGIN_NAMESPACE
 
+template<class _Tp>
+inline void destroy(_Tp* __pointer);
+
+template<class _ForwardIterator>
+inline void destroy(_ForwardIterator __first, _ForwardIterator __last);
 // construct and destroy.  These functions are not part of the C++ standard,
 // and are provided for backward compatibility with the HP STL.  We also
 // provide internal names _Construct and _Destroy that can be used within

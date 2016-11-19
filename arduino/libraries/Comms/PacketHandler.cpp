@@ -1,7 +1,7 @@
 #include "PacketHandler.h"
+#include <iostream>
 
-
-packet_t PacketHandler::createPacket(byte flags,byte messageID, byte packetID, byte targetService, byte sourceService, byte dataContent[]) {
+packet_t PacketHandler::createPacket(byte flags,byte messageID, byte packetID, byte targetService, byte sourceService, vector<byte> dataContent) {
 	packet_t packet;
 	packet_header_t packetHeader;
 	packetHeader.flags=flags & 0x7;
@@ -20,10 +20,11 @@ packet_t PacketHandler::createPacket(byte flags,byte messageID, byte packetID, b
 void PacketHandler::sendPacket(packet_t p, Port port) {
 	vector<byte> serializedPacket;
 	
-	byte size= sizeof(p.packetHeader)+sizeof(p.dataContent); //get total packet size
+	byte size= sizeof(p.packetHeader)+p.dataContent.size(); //get total packet size
 	byte b[64]; //ready memory for byte array cast
 	memcpy(b, &p, sizeof(p.packetHeader));//copy header to first part of byte array
-	memcpy(b+sizeof(p.packetHeader), &p, sizeof(p.dataContent));
+	memcpy(b+ sizeof(p.packetHeader), &p.dataContent[0], p.dataContent.size());//copy header to first part of byte array
+	//memcpy(b+sizeof(p.packetHeader), &p, p.dataContent.size());
 	//copy data content to remaining part of byte array
 	
 	serializedPacket.push_back (0xFE); //ADD START BYTE
@@ -39,6 +40,9 @@ void PacketHandler::sendPacket(packet_t p, Port port) {
 	
 	serializedPacket.push_back (0xFF); //ADD END BYTE
 	
+	std::cout <<"Printing byte stuffed packet1copy" <<endl;
+	for (std::vector<byte>::const_iterator i = serializedPacket.begin(); i != serializedPacket.end(); ++i)
+		cout << hex << int(*i) << ' ';
 	
 	
 }
@@ -56,10 +60,15 @@ byte PacketHandler::calculateCrc(packet_t p) {
 	// CRC8 calculator.
 	// Credit to Dallas/Maxim
 	byte crc = 0x00;
-	byte size = sizeof(p.packetHeader) + sizeof(p.dataContent); //get total packet size
+	byte size= sizeof(p.packetHeader)+p.dataContent.size(); //get total packet size
 	byte b[64]; //ready memory for byte array cast
 	memcpy(b, &p, sizeof(p.packetHeader));//copy header to first part of byte array
-	memcpy(b + sizeof(p.packetHeader), &p, sizeof(p.dataContent));  //copy data content to remaining part of byte array
+	int counter=sizeof(p.packetHeader);
+	for (std::vector<byte>::const_iterator i = p.dataContent.begin(); i != p.dataContent.end(); ++i)
+		b[counter]=*i;
+		counter++;
+	cout << "Getting data content size" << endl;
+	cout << hex << p.dataContent.size() << endl;
 	for (int index = 0; index<size; index++) {
 		byte extract = b[index];
 		for (byte tempI = 8; tempI; tempI--) {

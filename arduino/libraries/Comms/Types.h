@@ -1,6 +1,6 @@
 #ifndef Types_h
 #define Types_h
-
+#include <vector>
 using namespace std;
 
 typedef unsigned char byte;
@@ -26,7 +26,7 @@ typedef struct
 typedef struct
 {
 	packet_header_t packetHeader;
-	unsigned char *dataContent;
+	vector<byte> dataContent;
 	
 } packet_t;
 
