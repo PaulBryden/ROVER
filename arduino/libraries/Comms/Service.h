@@ -19,14 +19,14 @@ class Service {
 private:
 	byte _id;
 	string _name;
-	map<Port, int, PortComparator> _portMap;
+	map<int, int> _portMap;
 
 public:
 	Service(byte id, string name);
 	byte getId();
 	string getName();
-	Port getOutgoingPort();
-	void setPortDistance(Port port, int distance);
+	int getOutgoingPort();
+	void setPortDistance(int port, int distance);
 };
 
 #endif
