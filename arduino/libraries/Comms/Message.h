@@ -9,6 +9,7 @@ class Message {
 
 
 public:
+	Message(void);
 	vector<packet_t> toPackets();
 
 	void readMessage();

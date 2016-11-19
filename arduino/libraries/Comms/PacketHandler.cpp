@@ -13,7 +13,7 @@ packet_t PacketHandler::createPacket(byte flags,byte messageID, byte packetID, b
 	packet.packetHeader=packetHeader;
 	packet.dataContent=dataContent;
 	packet.packetHeader.crc=calculateCrc(packet);
-	
+	return packet;
 	
 }
 
@@ -21,7 +21,7 @@ void PacketHandler::sendPacket(packet_t p, Port port) {
 	vector<byte> serializedPacket;
 	
 	byte size= sizeof(p.packetHeader)+sizeof(p.dataContent); //get total packet size
-	byte b[size]; //ready memory for byte array cast
+	byte b[64]; //ready memory for byte array cast
 	memcpy(b, &p, sizeof(p.packetHeader));//copy header to first part of byte array
 	memcpy(b+sizeof(p.packetHeader), &p, sizeof(p.dataContent));
 	//copy data content to remaining part of byte array
@@ -52,26 +52,27 @@ bool PacketHandler::crcCheck(packet_t p) {
 }
 
 
-
 byte PacketHandler::calculateCrc(packet_t p) {
 	// CRC8 calculator.
 	// Credit to Dallas/Maxim
-	byte crc=0x00;
-	byte size= sizeof(p.packetHeader)+sizeof(p.dataContent); //get total packet size
-	byte b[size]; //ready memory for byte array cast
+	byte crc = 0x00;
+	byte size = sizeof(p.packetHeader) + sizeof(p.dataContent); //get total packet size
+	byte b[64]; //ready memory for byte array cast
 	memcpy(b, &p, sizeof(p.packetHeader));//copy header to first part of byte array
-	memcpy(b+sizeof(p.packetHeader), &p, sizeof(p.dataContent));  //copy data content to remaining part of byte array
-	for( int index=0; index<size; index++){
+	memcpy(b + sizeof(p.packetHeader), &p, sizeof(p.dataContent));  //copy data content to remaining part of byte array
+	for (int index = 0; index<size; index++) {
 		byte extract = b[index];
-		for(byte tempI = 8; tempI; tempI--){
+		for (byte tempI = 8; tempI; tempI--) {
 			byte sum = (crc ^ extract) & 0x01;
 			crc >>= 1;
 			if (sum) {
-			crc ^= 0x8C;
-		}
-		extract >>= 1;
+				crc ^= 0x8C;
+			}
+			extract >>= 1;
 		}
 	}
 	return crc;
 }
+
+
 

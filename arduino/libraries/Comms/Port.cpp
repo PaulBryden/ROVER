@@ -10,6 +10,9 @@ void Port::write(vector<char> serializedPacket) {
 
 packet_t Port::getPacketFromBuffer() {
 	// TODO - implement Port::getPacketFromBuffer
+	packet_t testPacket;
+	testPacket.packetHeader.flags = 0x0;
+	return testPacket;
 }
 
 void Port::writePacket(packet_t p) {

@@ -5,14 +5,14 @@
 #include <iterator>
 #include <map>
 #include <string>
-/*
+
 struct PortComparator
 {
    bool operator() (const Port& lhs, const Port& rhs) const
    {
        return lhs.id < rhs.id;
    }
-};*/
+};
 
 class Service {
 
