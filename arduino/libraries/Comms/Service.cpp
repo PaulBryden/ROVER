@@ -16,10 +16,10 @@ string Service::getName() {
 }
 
 /* Returns the port with the shortest associated distance to this service. */
-int Service::getOutgoingPort() {
-	int p; // port number
+Port Service::getOutgoingPort() {
+	Port p; // port number
 	int d = -1;
-	map<int, int>::iterator it = _portMap.begin();
+	map<Port, int>::iterator it = _portMap.begin();
 	while(it != _portMap.end()) {
 		if (d < 0 || it->second < d) {
 			d = it->second;
@@ -31,7 +31,7 @@ int Service::getOutgoingPort() {
 
 /* Sets the associated distance for this service on a particular port. Will only 
 overwrite an existing entry if the new distance is less than the old distance. */
-void Service::setPortDistance(int port, int distance) {
+void Service::setPortDistance(Port port, int distance) {
 	if (_portMap.find(port) == _portMap.end()
 		|| _portMap[port] > distance) {
 		_portMap[port] = distance;

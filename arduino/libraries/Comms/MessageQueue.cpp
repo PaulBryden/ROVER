@@ -6,4 +6,6 @@ void MessageQueue::addMessage(Message m) {
 
 Message MessageQueue::popMessage() {
 	// TODO - implement MessageQueue::popMessage
+	Message testMessage;
+	return testMessage;
 }
