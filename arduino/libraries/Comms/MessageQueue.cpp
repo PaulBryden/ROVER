@@ -6,6 +6,7 @@ void MessageQueue::addMessage(Message m) {
 
 Message MessageQueue::popMessage() {
 	// TODO - implement MessageQueue::popMessage
-	Message testMessage;
+	vector<byte> data;
+	Message testMessage(0xff,0xff,0xff,0xff,0xff,data);
 	return testMessage;
 }

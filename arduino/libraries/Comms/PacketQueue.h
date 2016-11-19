@@ -3,7 +3,7 @@
 
 #include "Types.h"
 #include "Message.h"
-
+#include <deque>
 class PacketQueue {
 
 
@@ -12,7 +12,11 @@ public:
 
 	packet_t popPacket();
 
-	Message buildMessage(packet_t p[]);
+	Message checkPacketQueue();
+
+	Message buildMessage(vector<packet_t> p);
+	
+	void setPacketQueue(deque<packet_t> p);
 };
 
 #endif

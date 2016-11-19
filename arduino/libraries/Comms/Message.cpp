@@ -1,7 +1,16 @@
 #include "Message.h"
+byte _messageID;
+byte _targetService;
+byte _sourceService;
+byte _typeOfMessage;
+byte _messageBitfields;
+vector<byte> _bodyContent;
 
-Message::Message(void) {
-	
+Message::Message(byte messageID, byte targetService, byte sourceService, byte typeOfMessage, byte messageBitfields, vector<byte> bodyContent) {
+	_messageID = messageID;
+	_targetService = targetService;
+	_sourceService = sourceService;
+
 }
 
 vector<packet_t> Message::toPackets() {

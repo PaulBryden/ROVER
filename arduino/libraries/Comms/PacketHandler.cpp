@@ -24,7 +24,6 @@ void PacketHandler::sendPacket(packet_t p, Port port) {
 	byte b[64]; //ready memory for byte array cast
 	memcpy(b, &p, sizeof(p.packetHeader));//copy header to first part of byte array
 	memcpy(b+ sizeof(p.packetHeader), &p.dataContent[0], p.dataContent.size());//copy header to first part of byte array
-	//memcpy(b+sizeof(p.packetHeader), &p, p.dataContent.size());
 	//copy data content to remaining part of byte array
 	
 	serializedPacket.push_back (0xFE); //ADD START BYTE

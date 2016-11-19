@@ -9,7 +9,7 @@ class Message {
 
 
 public:
-	Message(void);
+	Message(byte messageID, byte targetService, byte sourceService, byte typeOfMessage, byte messageBitfields, vector<byte> bodyContent);
 	vector<packet_t> toPackets();
 
 	void readMessage();
