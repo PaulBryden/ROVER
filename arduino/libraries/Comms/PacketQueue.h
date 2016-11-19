@@ -2,6 +2,7 @@
 #define PacketQueue_h
 
 #include "Types.h"
+#include "Message.h"
 
 class PacketQueue {
 
