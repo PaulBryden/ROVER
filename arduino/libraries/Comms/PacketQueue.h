@@ -1,8 +1,8 @@
 #ifndef PacketQueue_h
 #define PacketQueue_h
-
 #include "Types.h"
 #include "Message.h"
+#include <iterator>
 #include <deque>
 class PacketQueue {
 

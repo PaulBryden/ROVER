@@ -1,6 +1,5 @@
 #ifndef Message_h
 #define Message_h
-
 #include "Types.h"
 #include <iterator>
 #include <vector>

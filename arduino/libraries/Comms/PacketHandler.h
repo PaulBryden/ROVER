@@ -3,6 +3,7 @@
 #include "Types.h"
 #include "Port.h"
 #include <cstring>
+#include <iterator>
 #include <vector>
 class PacketHandler {
 
