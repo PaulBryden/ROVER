@@ -10,7 +10,7 @@ class PacketQueue {
 public:
 	void addPacket(packet_t p);
 
-	packet_t popPacket();
+	void popPacket();
 
 	Message checkPacketQueue();
 
