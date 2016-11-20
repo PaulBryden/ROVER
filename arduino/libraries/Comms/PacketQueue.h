@@ -16,7 +16,6 @@ public:
 
 	Message buildMessage(vector<packet_t> p);
 	
-	void setPacketQueue(deque<packet_t> p);
 };
 
 #endif

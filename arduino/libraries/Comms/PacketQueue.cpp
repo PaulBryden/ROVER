@@ -1,6 +1,6 @@
 #include "PacketQueue.h"
 #include "Types.h"
-
+#include <iostream>
 deque<packet_t> packetQueue;
 void PacketQueue::addPacket(packet_t p) {
 	packetQueue.push_back(p);
@@ -15,30 +15,36 @@ Message PacketQueue::checkPacketQueue() {
 	vector<packet_t> messageTrack; //keep track of packets which could potentially create entire message
 
 	if (packetQueue.front().packetHeader.packetID == 1) { //if the first packet in buffer is the first packet of message
+		cout << "packetID=1" << endl;
+		cout << "packetQueue.size() = ";
+		cout << hex << packetQueue.size() << endl;
+		cout << "packetQueueDataContent";
+		cout << hex << packetQueue.front().dataContent.at(0) << endl;
 		messageTrack.push_back(packetQueue.front()); //add it to the potential packets list
 		if (packetQueue.size() >= packetQueue.front().dataContent.at(0)) { //if there are enough packets to build an entire message in the queue
-			int counter = 1; //keep track of number of packets in message
-			for (int i = 0; i < packetQueue.size(); i++) { 
-				if (packetQueue.at(i).packetHeader.messageID == packetQueue.front().packetHeader.messageID) { //if packets are part of same message
+			cout << "Enough packets to build message" << endl;
+			byte counter = 1; //keep track of number of packets in message
+			for (int i = 1; i < packetQueue.size(); i++) { 
+				if ((packetQueue.at(i).packetHeader.messageID == packetQueue.front().packetHeader.messageID)&&(packetQueue.at(i).packetHeader.packetID>counter) ){ //if packets are part of same message
+					cout << "Processing packet:";
+					cout << hex << int(packetQueue.at(i).packetHeader.packetID) << endl;
 					counter++;
 					messageTrack.push_back(packetQueue.at(i)); //add potential packet
 				}
 			}
 			if (counter == packetQueue.front().dataContent.at(0)) { //if all packets that could make up the message are present
+				cout << "Building Message" << endl;
 				return buildMessage(messageTrack); //build the message and return it.
 			}
 		}
 	}
 	else {
+		cout << "Popping Packet" << endl;
 		popPacket(); //if first packet in queue is not the first packet in message. Something has gone wrong, so pop it.
 	}
 
 }
 
-void PacketQueue::setPacketQueue(deque<packet_t> p) { //set packet queue for debug purposes.
-
-	packetQueue = p;
-}
 
 Message PacketQueue::buildMessage(vector<packet_t> p) {
 	byte messageID = p.at(0).packetHeader.messageID; //Grab data about Message from first packet
