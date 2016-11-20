@@ -1,7 +1,9 @@
 #include "MessageQueue.h"
 
+deque<Message> messageQueue;
 void MessageQueue::addMessage(Message m) {
 	// TODO - implement MessageQueue::addMessage
+	messageQueue.push_back(m);
 }
 
 Message MessageQueue::popMessage() {

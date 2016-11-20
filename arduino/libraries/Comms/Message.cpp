@@ -24,5 +24,4 @@ vector<packet_t> Message::toPackets() {
 
 void Message::readMessage() {
 	// TODO - implement Message::readMessage
-
 }
