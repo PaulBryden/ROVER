@@ -22,22 +22,21 @@ vector<packet_t> Message::toPackets() {
 	// Generates bytestream 
 	vector<byte> bytes = ((vector<byte>) message_header_t);
 	bytes.insert(bytes.end(), _bodyContent.begin(), _bodyContent.end());
-	vector<packet_t> serializedPacket;
+	vector<packet_t> packets;
+	PacketHandler handler = new PacketHandler();
 	
-	for(int pNo; ibytes.size() > 0; pNo++){
+	for(int pNo; bytes.size() > 0; pNo++){
 		vector<byte> tempByteVector = new vector<byte>();
 		packet_t tempPacket = new packet_t;
 		for(int i = 0; i < PACKET_CONTENT_SIZE; i++){
 			tempByteVector.push_back(bytes[i]);
 			bytes.erase(0);
 		}
+		//Flags currently defaulted to 0  as not implemented yet
+		tempPacket = handler.createPacket(000, _messageID, pNo, _targetService, _sourceService, tempByteVector);
+		packets.push_back(tempPacket);
 	}
-	
-	 //TO BE IMPLEMENTED
-	packet_t testPacket;
-	testPacket.packetHeader.crc = 0x0;
-	serializedPacket.push_back(testPacket);
-	return serializedPacket;
+	return packets;
 }
 
 void Message::readMessage() {
