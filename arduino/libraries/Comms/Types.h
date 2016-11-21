@@ -1,6 +1,8 @@
 #ifndef Types_h
 #define Types_h
+#include <iterator>
 #include <vector>
+
 using namespace std;
 
 typedef unsigned char byte;

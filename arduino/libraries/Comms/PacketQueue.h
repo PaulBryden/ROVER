@@ -1,8 +1,8 @@
 #ifndef PacketQueue_h
 #define PacketQueue_h
-
 #include "Types.h"
 #include "Message.h"
+#include <iterator>
 #include <deque>
 class PacketQueue {
 
@@ -10,13 +10,12 @@ class PacketQueue {
 public:
 	void addPacket(packet_t p);
 
-	packet_t popPacket();
+	void popPacket();
 
 	Message checkPacketQueue();
 
 	Message buildMessage(vector<packet_t> p);
 	
-	void setPacketQueue(deque<packet_t> p);
 };
 
 #endif

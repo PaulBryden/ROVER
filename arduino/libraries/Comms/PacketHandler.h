@@ -2,7 +2,8 @@
 #define PacketHandler_h
 #include "Types.h"
 #include "Port.h"
-#include <cstring>
+//#include <cstring>
+#include <iterator>
 #include <vector>
 class PacketHandler {
 
