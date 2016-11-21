@@ -15,6 +15,7 @@ public:
 	Service* getService(byte id);
 	void addService(Service s);
 	void mergeTable(ServiceTable t);
+	map<byte, Service*> getTable();
 };
 
 #endif

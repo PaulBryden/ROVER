@@ -26,7 +26,9 @@ public:
 	byte getId();
 	string getName();
 	int getOutgoingPort();
+	int getShortestDistance();
 	void setPortDistance(int port, int distance);
+	map<int, int> getPortMap();
 };
 
 #endif
