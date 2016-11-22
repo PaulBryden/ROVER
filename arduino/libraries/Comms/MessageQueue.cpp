@@ -6,9 +6,12 @@ void MessageQueue::addMessage(Message m) {
 	messageQueue.push_back(m);
 }
 
+void MessageQueue::addPriorityMessage(Message m){
+	messageQueue.push_front(m);
+}
+
+
 Message MessageQueue::popMessage() {
 	// TODO - implement MessageQueue::popMessage
-	vector<byte> data;
-	Message testMessage(0xff,0xff,0xff,0xff,0xff,data);
-	return testMessage;
+	return messageQueue.pop_front();
 }

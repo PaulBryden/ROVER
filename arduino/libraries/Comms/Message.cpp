@@ -20,7 +20,7 @@ Message::Message(byte messageID, byte targetService, byte sourceService, byte ty
 
 vector<packet_t> Message::toPackets() {
 	// Generates bytestream 
-	vector<byte> bytes = ((vector<byte>) message_header_t);
+	deque<byte> bytes = ((deque<byte>) message_header_t);
 	bytes.insert(bytes.end(), _bodyContent.begin(), _bodyContent.end());
 	vector<packet_t> packets;
 	PacketHandler handler = new PacketHandler();
@@ -30,7 +30,7 @@ vector<packet_t> Message::toPackets() {
 		packet_t tempPacket = new packet_t;
 		for(int i = 0; i < PACKET_CONTENT_SIZE; i++){
 			tempByteVector.push_back(bytes[i]);
-			bytes.erase(0);
+			bytes.erase(bytes.begin());
 		}
 		//Flags currently defaulted to 0  as not implemented yet
 		tempPacket = handler.createPacket(000, _messageID, pNo, _targetService, _sourceService, tempByteVector);
@@ -39,6 +39,25 @@ vector<packet_t> Message::toPackets() {
 	return packets;
 }
 
+
+//if resource discover 2/7 pass on if not serial.println
 void Message::readMessage() {
+
+#define PASS_ON 00000111
+#define ADVERTISE 00000010
+#define STOP 00001000
+
 	// TODO - implement Message::readMessage
+	if (_messageHeader.typeOfMessage == PASS_ON) {
+		//initate ResourceDiscover and pass on
+	}
+	else if (_messageHeader.typeOfMessage == ADVERTISE) {
+		//advertise
+	}
+	else if (_messageHeader.typeOfMessage == STOP) {
+		//Inititate Resource Discovery and Stop
+	}
+	else {
+		Serial.println("This is not a resource discovery message.");
+	}
 }
