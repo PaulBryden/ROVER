@@ -27,7 +27,7 @@ Message PacketQueue::checkPacketQueue() {
 			cout << "Enough packets to build message" << endl;
 			byte counter = 1; //keep track of number of packets in message
 			for (int i = 1; i < packetQueue.size(); i++) { 
-				if ((packetQueue[i].packetHeader.messageID == packetQueue.front().packetHeader.messageID)&&(packetQueue[i].packetHeader.packetID>counter) ){ //if packets are part of same message
+				if ((packetQueue[i].packetHeader.messageID == packetQueue.front().packetHeader.messageID)&&(packetQueue[i].packetHeader.sourceService==packetQueue[0].packetHeader.sourceService)&&(packetQueue[i].packetHeader.packetID>counter) ){ //if packets are part of same message
 					cout << "Processing packet:";
 					cout << hex << int(packetQueue[i].packetHeader.messageID) << endl;
 					counter++;

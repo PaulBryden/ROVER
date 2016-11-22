@@ -53,6 +53,6 @@ int main() {
 	cout << hex << int(packet1.packetHeader.messageID) << endl;
 	cout << "packet2 id was: " << endl;
 	cout << hex << int(packet1.packetHeader.messageID) << endl;
-
+	newPacketQueue.checkPacketQueue();
 
 }
