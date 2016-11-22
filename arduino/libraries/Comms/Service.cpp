@@ -26,8 +26,7 @@ Port Service::getOutgoingPort() {
 			p = it->first;
 		}
 	}
-	return ports[p];
-	//return p;
+	return portList[p];
 }
 
 /* Returns the shortest distance associated with this service. */
