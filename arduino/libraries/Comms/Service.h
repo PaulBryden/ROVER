@@ -25,7 +25,7 @@ public:
 	Service(byte id, string name);
 	byte getId();
 	string getName();
-	int getOutgoingPort();
+	Port getOutgoingPort();
 	int getShortestDistance();
 	void setPortDistance(int port, int distance);
 	map<int, int> getPortMap();

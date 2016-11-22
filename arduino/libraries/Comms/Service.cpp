@@ -16,7 +16,7 @@ string Service::getName() {
 }
 
 /* Returns the port with the shortest associated distance to this service. */
-int Service::getOutgoingPort() {
+Port Service::getOutgoingPort() {
 	int p; // port number
 	int d = -1;
 	map<int, int>::iterator it = _portMap.begin();
@@ -26,7 +26,8 @@ int Service::getOutgoingPort() {
 			p = it->first;
 		}
 	}
-	return p;
+	return ports[p];
+	//return p;
 }
 
 /* Returns the shortest distance associated with this service. */
