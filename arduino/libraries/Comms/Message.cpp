@@ -43,16 +43,16 @@ vector<packet_t> Message::toPackets() {
 //if resource discover 2/7 pass on if not serial.println
 void Message::readMessage() {
 
-#define PASS_ON 00000111
-#define ADVERTISE 00000010
-#define STOP 00001000
+#define MT_PASS_ON 00000111
+#define MT_ADVERTISE 00000010
+#define MT_STOP 00001000
 
 	// TODO - implement Message::readMessage
 	if (_messageHeader.typeOfMessage == PASS_ON) {
 		//initate ResourceDiscover and pass on
 	}
 	else if (_messageHeader.typeOfMessage == ADVERTISE) {
-		//advertise
+		//Advertisement
 	}
 	else if (_messageHeader.typeOfMessage == STOP) {
 		//Inititate Resource Discovery and Stop
