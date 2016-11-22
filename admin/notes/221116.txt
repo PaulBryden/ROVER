@@ -1,0 +1,44 @@
+Notes from Rover meeting 22/11/16
+
+
+PROGRESS
+
+Paul has completed PacketHandler and PacketQueue, including unit testing. (85% of that required for demo)
+Service and ServiceTable are complete but not fully tested.
+Everything else is still in progress. NB this was due for today.
+
+***FINAL DEADLINE***: All critical code (i.e. everything required for message generation, passing, and queuing) MUST be finished and FULLY TESTED by Friday. Next Software team meeting will be Friday at 12noon. At this meeting we will be compiling and testing the system - as there may be issues with units interacting, there will be no time to work on code then. Aim to have all your code written, tested, pushed, and merged by Thursday PM at the latest.
+
+
+TECHNICAL/DESIGN ISSUES
+
+Bytestuffing: Add OxFE to end of packet to avoid necessity of waiting for remainder of package. Eventually we should switch to using COBS (https://en.wikipedia.org/wiki/Consistent_Overhead_Byte_Stuffing), but we're not changing it for the demo.
+
+MessageQueue messageQueue will static public variable in Comms
+vector<Port> portList will be static public variable in Comms
+ServiceTable serviceTable will be static public variable in Comms
+
+Service::getOutgoingPort() will return a Port object from portList
+Service::getShortestDistance() will return the distance of the service (ie. number of hops) as an int. Local services will return a distance of 0.
+
+DavidD will set up Wiki on GitLab - any important information required for future reference should be posted here, as well as technical discussions that are of interest to everyone. We should try and use the Facebook chat only for discussing immediate issues, not for keeping a record.
+
+
+DEMONSTRATION
+
+Order of demonstrations: Mechanics - Electronics - Software
+
+As we are not confident how robust the system will be by Tuesday, we will make a video demo.
+
+Friday meeting will be to put everything together and test the system, and make the video if there is time. Otherwise we will meet Monday AM to film the video - as the system will be working by then, not everyone's attendance will be required.
+
+Gary is in charge of creating/collating the Powrpoint presentation. 
+
+DavidD and Paul - Overview of requirements/project management/high-level system design
+Jack and DavidP - Message and packet specification (including implementation)
+Kyle and Gary - Message passing and queuing (including routing), website
+Pete and Andrew - Resource discovery and initialisation procedure
+DavidD - Press the big red button
+Everyone - Q and A
+
+Allow approximately 3-4 mins and 2 slides per person, but be sensible - if your topic makes it sensible to spend less time on more slides, you can do so. The focus should be on the achievements of the team and the operation of the system, but be sure to mention what you personally were working on and claim credit where it is due.

@@ -1,10 +1,10 @@
-#include "Comms/Comms.h"
-#include "Comms/PacketHandler.h"
-#include "Comms/PacketHandler.cpp"
-#include "Comms/PacketQueue.h"
-#include "Comms/PacketQueue.cpp"
-#include "Comms/Message.h"
-#include "Comms/Message.cpp"
+#include "../Comms/Comms.h"
+#include "../Comms/PacketHandler.h"
+#include "../Comms/PacketHandler.cpp"
+#include "../Comms/PacketQueue.h"
+#include "../Comms/PacketQueue.cpp"
+#include "../Comms/Message.h"
+#include "../Comms/Message.cpp"
 #include <iostream>
 int main() {
 	Port p;

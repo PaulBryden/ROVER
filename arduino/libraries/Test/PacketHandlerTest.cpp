@@ -1,6 +1,6 @@
-#include "Comms/Comms.h"
-#include "Comms/PacketHandler.h"
-#include "Comms/PacketHandler.cpp"
+#include "../Comms/Comms.h"
+#include "../Comms/PacketHandler.h"
+#include "../Comms/PacketHandler.cpp"
 #include <iostream>
 int main() {
 	Port p;

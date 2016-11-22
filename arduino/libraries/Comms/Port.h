@@ -6,8 +6,12 @@
 
 class Port {
 
+private:
+	vector<byte> _buffer;
+	HardwareSerial _serial;
 
 public:
+	Port(HardwareSerial serial);
 	int id;
 	void read();
 
@@ -15,7 +19,6 @@ public:
 
 	packet_t getPacketFromBuffer();
 
-	void writePacket(packet_t p);
 };
 
 #endif
