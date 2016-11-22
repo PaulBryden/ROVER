@@ -4,6 +4,10 @@
 #include "Message.h"
 #include "Port.h"
 
+MessageQueue messageQueue;
+vector<Port> portList;
+ServiceTable serviceTable;
+
 class Comms {
 
 
