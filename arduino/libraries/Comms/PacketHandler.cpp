@@ -37,11 +37,12 @@ void PacketHandler::sendPacket(packet_t p, Port port) {
 		}
 	}
 	
-	serializedPacket.push_back (0xFF); //ADD END BYTE
-	
-	/**std::cout <<"Printing byte stuffed packet1copy" <<endl;
+	serializedPacket.push_back (0xFF); //ADD END BYTE(s)
+	serializedPacket.push_back(0xFE);
+
+	std::cout <<"Printing byte stuffed packet1copy" <<endl;
 	for (std::vector<byte>::const_iterator i = serializedPacket.begin(); i != serializedPacket.end(); ++i)
-		cout << hex << int(*i) << ' ';*/
+		cout << hex << int(*i) << ' ';
 	
 	
 }
@@ -66,8 +67,8 @@ byte PacketHandler::calculateCrc(packet_t p) {
 	for (std::vector<byte>::const_iterator i = p.dataContent.begin(); i != p.dataContent.end(); ++i)
 		b[counter]=*i;
 		counter++;
-	//cout << "Getting data content size" << endl;
-	//cout << hex << p.dataContent.size() << endl;
+	cout << "Getting data content size" << endl;
+	cout << hex << p.dataContent.size() << endl;
 	for (int index = 0; index<size; index++) {
 		byte extract = b[index];
 		for (byte tempI = 8; tempI; tempI--) {
