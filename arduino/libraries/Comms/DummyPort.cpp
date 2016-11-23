@@ -1,9 +1,14 @@
-#include "Port.h"
+#include "DummyPort.h"
+#include <iostream>
 
-
-Port::Port(HardwareSerial serial) {
+Port::Port(string serial) {
 	_serial = serial;
 }
+
+Port::Port(){
+	_serial = "NOVAL";
+}
+
 
 void Port::read() {
 	// Read from _serial and add to _buffer
@@ -11,7 +16,10 @@ void Port::read() {
 }
 
 void Port::write(vector<char> serializedPacket) {
-	_serial.write(p);
+	_serial = "";
+	for (char letter : serializedPacket)
+    _serial += letter;
+	cout<<_serial<<"\n";
 }
 
 packet_t Port::getPacketFromBuffer() {
