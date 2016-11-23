@@ -31,6 +31,6 @@ void setup() {
 }
 
 void loop() {
-  serial << table.toString() << endl; //.getService(5)->getName() << endl;
-  delay(1000);
+  serial << table.toString() << endl;
+ // delay(1000);
 }

@@ -1,3 +1,5 @@
+#ifdef NOARDUINO
+
 #include "DummyPort.h"
 #include <iostream>
 
@@ -29,3 +31,5 @@ packet_t Port::getPacketFromBuffer() {
 	testPacket.packetHeader.flags = 0x0;
 	return testPacket;
 }
+
+#endif

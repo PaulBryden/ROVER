@@ -1,8 +1,8 @@
+#ifdef NOARDUINO
 #ifndef DummyPort_h
 #define DummyPort_h
 #include <iterator>
 #include <vector>
-//#include "Arduino.h"
 #include "Types.h"
 
 class Port {
@@ -23,4 +23,5 @@ public:
 
 };
 
+#endif
 #endif

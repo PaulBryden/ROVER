@@ -1,5 +1,5 @@
 #include "Port.h"
-#include "Arduino.h"
+#include <HardwareSerial.h>
 
 Port::Port(HardwareSerial *serial) {
 	_serial = serial;

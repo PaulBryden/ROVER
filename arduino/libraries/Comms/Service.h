@@ -1,10 +1,10 @@
 #ifndef Service_h
 #define Service_h
 
-#ifdef Arduino_h
-#include "Port.h"
-#else
+#ifdef NOARDUINO
 #include "DummyPort.h"
+#else
+#include "Port.h"
 #endif
 
 #include <iterator>
