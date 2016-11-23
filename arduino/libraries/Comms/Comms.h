@@ -2,6 +2,8 @@
 #define Comms_h
 
 #include "Message.h"
+
+#ifdef Arduino_h
 #include "Port.h"
 #include "MessageQueue.h"
 #include "ServiceTable.h"

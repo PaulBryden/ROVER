@@ -1,6 +1,7 @@
-#include "../Comms/Comms.h"
-#include "../Comms/PacketHandler.h"
+//#include "../Comms/Comms.h"
 #include "../Comms/PacketHandler.cpp"
+//#include "../Comms/Comms.cpp"
+#include "../Comms/DummyPort.cpp"
 #include <iostream>
 int main() {
 	Port p;
@@ -11,7 +12,7 @@ int main() {
 		cout << hex << int(*i) << ' ';
 	cout << endl;
 	std::vector<byte> foo2 (4,200);
-	std::vector<byte> foo3 (4,50); 
+	std::vector<byte> foo3 (4,50);
 	packet_t packet1;
 	packet_t packet2;
 	packet_t packet3;
@@ -41,6 +42,5 @@ int main() {
 		std::cout << "CRC for input packet does not match" <<endl;
 	}
 	newPacketHandler.sendPacket(packet1Copy,p);
-	
-
+  return 0;
 }

@@ -1,6 +1,8 @@
 #ifndef PacketHandler_h
 #define PacketHandler_h
 #include "Types.h"
+
+#ifdef Arduino_h
 #include "Port.h"
 //#include <cstring>
 #include <iterator>
