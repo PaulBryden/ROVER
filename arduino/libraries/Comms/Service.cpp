@@ -1,4 +1,5 @@
 #include "Service.h"
+#include "Comms.h"
 
 Service::Service(byte id, string name) {
 	_id = id;

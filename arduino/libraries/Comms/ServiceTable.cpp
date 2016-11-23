@@ -33,6 +33,6 @@ void ServiceTable::mergeTable(ServiceTable t) {
 }
 
 /* Returns the look-up table. */
-map<byte, Service*> getTable() {
+map<byte, Service*> ServiceTable::getTable() {
 	return _table;
 }
