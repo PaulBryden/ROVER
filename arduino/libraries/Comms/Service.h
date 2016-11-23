@@ -1,6 +1,5 @@
 #ifndef Service_h
 #define Service_h
-#define Arduino_h
 
 #ifdef NOARDUINO
 #include "DummyPort.h"
