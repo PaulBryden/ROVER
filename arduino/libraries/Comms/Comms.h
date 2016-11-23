@@ -5,13 +5,15 @@
 
 #ifdef Arduino_h
 #include "Port.h"
-#else
-#include "DummyPort.h"
-#endif
+#include "MessageQueue.h"
+#include "ServiceTable.h"
+#include <iterator>
+#include <vector>
 
-MessageQueue messageQueue;
-vector<Port> portList;
-ServiceTable serviceTable;
+
+extern MessageQueue messageQueue;
+extern vector<Port> portList;
+extern ServiceTable serviceTable;
 
 class Comms {
 

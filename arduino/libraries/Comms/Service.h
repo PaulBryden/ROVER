@@ -11,14 +11,6 @@
 #include <map>
 #include <string>
 
-struct PortComparator
-{
-   bool operator() (const Port& lhs, const Port& rhs) const
-   {
-       return lhs.id < rhs.id;
-   }
-};
-
 class Service {
 
 private:
@@ -28,6 +20,7 @@ private:
 
 public:
 	Service(byte id, string name);
+	~Service();
 	byte getId();
 	string getName();
 	Port getOutgoingPort();

@@ -1,7 +1,7 @@
 #include "Port.h"
+#include "Arduino.h"
 
-
-Port::Port(HardwareSerial serial) {
+Port::Port(HardwareSerial *serial) {
 	_serial = serial;
 }
 
@@ -10,8 +10,8 @@ void Port::read() {
 	// TODO - implement Port::read
 }
 
-void Port::write(vector<char> serializedPacket) {
-	_serial.write(p);
+void Port::write(vector<char> packet) {
+	_serial->write("hi");
 }
 
 packet_t Port::getPacketFromBuffer() {

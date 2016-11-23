@@ -4,11 +4,7 @@
 
 #ifdef Arduino_h
 #include "Port.h"
-#else
-#include "DummyPort.h"
-#endif
-
-#include <cstring>
+//#include <cstring>
 #include <iterator>
 #include <vector>
 class PacketHandler {

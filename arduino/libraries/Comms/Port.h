@@ -4,14 +4,15 @@
 #include <vector>
 #include "Types.h"
 
+class HardwareSerial;
 class Port {
 
 private:
 	vector<byte> _buffer;
-	HardwareSerial _serial;
+	HardwareSerial* _serial;
 
 public:
-	Port(HardwareSerial serial);
+	Port(HardwareSerial *serial);
 	int id;
 	void read();
 
