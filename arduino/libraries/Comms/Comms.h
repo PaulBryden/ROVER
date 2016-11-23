@@ -3,8 +3,10 @@
 
 #include "Message.h"
 
-#ifdef Arduino_h
+#ifndef NOARDUINO
 #include "Port.h"
+#endif
+
 #include "MessageQueue.h"
 #include "ServiceTable.h"
 #include <iterator>
