@@ -27,7 +27,7 @@ int makeMessage(){
 }
 
 int main(){
-	printf("%d", makeMessage());
+	printf("Make Message : %d", makeMessage());
 	return 1;
 	
 }
