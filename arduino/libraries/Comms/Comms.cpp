@@ -9,5 +9,7 @@ void Comms::checkMessages() {
 }
 
 void Comms::initialiseNode(Port ports[]) {
-	// TODO - implement Comms::initialiseNode
+	// TODO create static variables
+	vector<Port> portList(ports, ports + sizeof ports / sizeof ports[0]);
+	// TODO Do resource discovery stuff
 }

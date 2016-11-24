@@ -37,11 +37,12 @@ void PacketHandler::sendPacket(packet_t p, Port port) {
 		}
 	}
 	
-	serializedPacket.push_back (0xFF); //ADD END BYTE
-	
-	/**std::cout <<"Printing byte stuffed packet1copy" <<endl;
-	for (std::vector<byte>::const_iterator i = serializedPacket.begin(); i != serializedPacket.end(); ++i)
-		cout << hex << int(*i) << ' ';*/
+	serializedPacket.push_back (0xFF); //ADD END BYTE(s)
+	serializedPacket.push_back(0xFE);
+
+	//std::cout <<"Printing byte stuffed packet1copy" <<endl;
+	//for (std::vector<byte>::const_iterator i = serializedPacket.begin(); i != serializedPacket.end(); ++i)
+	//	cout << hex << int(*i) << ' ';
 	
 	
 }

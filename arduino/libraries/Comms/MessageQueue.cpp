@@ -13,5 +13,7 @@ void MessageQueue::addPriorityMessage(Message m){
 
 Message MessageQueue::popMessage() {
 	// TODO - implement MessageQueue::popMessage
-	return messageQueue.pop_front();
+	Message m = messageQueue.front();
+	messageQueue.pop_front();
+	return m;
 }

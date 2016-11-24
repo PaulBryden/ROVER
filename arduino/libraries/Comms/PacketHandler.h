@@ -1,10 +1,16 @@
 #ifndef PacketHandler_h
 #define PacketHandler_h
 #include "Types.h"
+
+#ifdef NOARDUINO
+#include <cstring>
+#else
 #include "Port.h"
-//#include <cstring>
+#endif
+
 #include <iterator>
 #include <vector>
+
 class PacketHandler {
 
 

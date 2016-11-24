@@ -1,17 +1,27 @@
-#include "Port.h"
-#include <HardwareSerial.h>
+#ifdef NOARDUINO
 
-Port::Port(HardwareSerial *serial) {
+#include "DummyPort.h"
+#include <iostream>
+
+Port::Port(string serial) {
 	_serial = serial;
 }
+
+Port::Port(){
+	_serial = "NOVAL";
+}
+
 
 void Port::read() {
 	// Read from _serial and add to _buffer
 	// TODO - implement Port::read
 }
 
-void Port::write(vector<char> packet) {
-	_serial->write("hi");
+void Port::write(vector<char> serializedPacket) {
+	_serial = "";
+	for (char letter : serializedPacket)
+    _serial += letter;
+	cout<<_serial<<"\n";
 }
 
 packet_t Port::getPacketFromBuffer() {
@@ -21,3 +31,5 @@ packet_t Port::getPacketFromBuffer() {
 	testPacket.packetHeader.flags = 0x0;
 	return testPacket;
 }
+
+#endif

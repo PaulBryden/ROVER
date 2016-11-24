@@ -1,8 +1,12 @@
 #include "Service.h"
+#include "Comms.h"
 
 Service::Service(byte id, string name) {
 	_id = id;
 	_name = name;
+}
+
+Service::~Service() {
 }
 
 /* Returns the ID number of the service. */
@@ -16,17 +20,27 @@ string Service::getName() {
 }
 
 /* Returns the port with the shortest associated distance to this service. */
-int Service::getOutgoingPort() {
+Port Service::getOutgoingPort() {
 	int p; // port number
 	int d = -1;
-	map<int, int>::iterator it = _portMap.begin();
-	while(it != _portMap.end()) {
+	for (map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
 		if (d < 0 || it->second < d) {
 			d = it->second;
 			p = it->first;
 		}
 	}
-	return p;
+	return portList[p];
+}
+
+/* Returns the shortest distance associated with this service. */
+int Service::getShortestDistance() {
+	int d = -1;
+	for (map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
+		if (d < 0 || it->second < d) {
+			d = it->second;
+		}
+	}
+	return d;
 }
 
 /* Sets the associated distance for this service on a particular port. Will only 
@@ -36,4 +50,9 @@ void Service::setPortDistance(int port, int distance) {
 		|| _portMap[port] > distance) {
 		_portMap[port] = distance;
 	}
+}
+
+/* Returns the port map */
+map<int, int> Service::getPortMap() {
+	return _portMap;
 }

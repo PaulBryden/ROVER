@@ -3,6 +3,8 @@
 #include "Types.h"
 #include <iterator>
 #include <vector>
+#include <deque>
+#include <stdio.h>
 
 class Message {
 

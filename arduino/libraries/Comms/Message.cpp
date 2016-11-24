@@ -1,4 +1,8 @@
 #include "Message.h"
+#include "PacketHandler.cpp"
+
+using namespace std;
+
 byte _messageID;
 byte _targetService;
 byte _sourceService;
@@ -15,19 +19,19 @@ Message::Message(byte messageID, byte targetService, byte sourceService, byte ty
 	//Integer division always rounds down so adding one to give desired result
 	_messageHeader.numOfPacketsInMessage = ((MESSAGE_HEADER_SIZE + _bodyContent.size())/PACKET_CONTENT_SIZE) + 1;
 	_messageHeader.typeOfMessage = _typeOfMessage;
-	_messageHeader.flags = _messageBitfields;
+	_messageHeader.messageBitfields = _messageBitfields;
 }
 
 vector<packet_t> Message::toPackets() {
 	// Generates bytestream 
-	deque<byte> bytes = ((deque<byte>) message_header_t);
+	deque<byte> bytes = ((deque<byte>) _messageHeader);
 	bytes.insert(bytes.end(), _bodyContent.begin(), _bodyContent.end());
 	vector<packet_t> packets;
-	PacketHandler handler = new PacketHandler();
+	PacketHandler handler;
 	
 	for(int pNo; bytes.size() > 0; pNo++){
-		vector<byte> tempByteVector = new vector<byte>();
-		packet_t tempPacket = new packet_t;
+		vector<byte> tempByteVector;
+		packet_t tempPacket;
 		for(int i = 0; i < PACKET_CONTENT_SIZE; i++){
 			tempByteVector.push_back(bytes[i]);
 			bytes.erase(bytes.begin());
@@ -48,16 +52,17 @@ void Message::readMessage() {
 #define MT_STOP 00001000
 
 	// TODO - implement Message::readMessage
-	if (_messageHeader.typeOfMessage == PASS_ON) {
+	if (_messageHeader.typeOfMessage == MT_PASS_ON) {
 		//initate ResourceDiscover and pass on
 	}
-	else if (_messageHeader.typeOfMessage == ADVERTISE) {
+	else if (_messageHeader.typeOfMessage == MT_ADVERTISE) {
 		//Advertisement
 	}
-	else if (_messageHeader.typeOfMessage == STOP) {
+	else if (_messageHeader.typeOfMessage == MT_STOP) {
 		//Inititate Resource Discovery and Stop
 	}
 	else {
-		Serial.println("This is not a resource discovery message.");
+		//DEBUG
+		printf("This is not a resource discovery message.");
 	}
 }

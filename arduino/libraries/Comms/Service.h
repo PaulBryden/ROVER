@@ -1,18 +1,15 @@
 #ifndef Service_h
 #define Service_h
 
+#ifdef NOARDUINO
+#include "DummyPort.h"
+#else
 #include "Port.h"
+#endif
+
 #include <iterator>
 #include <map>
 #include <string>
-
-struct PortComparator
-{
-   bool operator() (const Port& lhs, const Port& rhs) const
-   {
-       return lhs.id < rhs.id;
-   }
-};
 
 class Service {
 
@@ -23,10 +20,13 @@ private:
 
 public:
 	Service(byte id, string name);
+	~Service();
 	byte getId();
 	string getName();
-	int getOutgoingPort();
+	Port getOutgoingPort();
+	int getShortestDistance();
 	void setPortDistance(int port, int distance);
+	map<int, int> getPortMap();
 };
 
 #endif

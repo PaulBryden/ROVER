@@ -1,18 +1,19 @@
-#ifndef Port_h
-#define Port_h
+#ifdef NOARDUINO
+#ifndef DummyPort_h
+#define DummyPort_h
 #include <iterator>
 #include <vector>
 #include "Types.h"
 
-class HardwareSerial;
 class Port {
 
 private:
 	vector<byte> _buffer;
-	HardwareSerial* _serial;
+	string _serial;
 
 public:
-	Port(HardwareSerial *serial);
+	Port(string serial);
+	Port();
 	int id;
 	void read();
 
@@ -22,4 +23,5 @@ public:
 
 };
 
+#endif
 #endif

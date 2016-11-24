@@ -1,10 +1,10 @@
-#include "Comms/Comms.h"
-#include "Comms/PacketHandler.h"
-#include "Comms/PacketHandler.cpp"
-#include "Comms/PacketQueue.h"
-#include "Comms/PacketQueue.cpp"
-#include "Comms/Message.h"
-#include "Comms/Message.cpp"
+#include "../Comms/Comms.h"
+#include "../Comms/PacketHandler.h"
+#include "../Comms/PacketHandler.cpp"
+#include "../Comms/PacketQueue.h"
+#include "../Comms/PacketQueue.cpp"
+#include "../Comms/Message.h"
+#include "../Comms/Message.cpp"
 #include <iostream>
 int main() {
 	Port p;
@@ -53,6 +53,6 @@ int main() {
 	cout << hex << int(packet1.packetHeader.messageID) << endl;
 	cout << "packet2 id was: " << endl;
 	cout << hex << int(packet1.packetHeader.messageID) << endl;
-
+	newPacketQueue.checkPacketQueue();
 
 }
