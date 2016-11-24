@@ -22,7 +22,7 @@ int makeMessage(){
 	testContent.push_back(0x56);
 	testContent.push_back(0x56);		
 	testContent.push_back(0x56);
-	Message *m1 = new Message((byte) 0x00,(byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, testContent);
+	Message m1((byte) 0x00,(byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, testContent);
 	return 1;
 }
 

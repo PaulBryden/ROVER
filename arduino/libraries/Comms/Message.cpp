@@ -24,11 +24,14 @@ Message::Message(byte messageID, byte targetService, byte sourceService, byte ty
 
 vector<packet_t> Message::toPackets() {
 	// Generates bytestream 
-	deque<byte> bytes = ((deque<byte>) _messageHeader);
+	deque<byte> bytes; 
+	bytes[] = _messageHeader.numOfPacketsInMessage;
+	bytes[] = _messageHeader.typeOfMessage;
+	bytes[] = _messageHeader.messageBitfields;
 	bytes.insert(bytes.end(), _bodyContent.begin(), _bodyContent.end());
 	vector<packet_t> packets;
 	PacketHandler handler;
-	
+	 
 	for(int pNo; bytes.size() > 0; pNo++){
 		vector<byte> tempByteVector;
 		packet_t tempPacket;
