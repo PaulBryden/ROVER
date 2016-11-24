@@ -9,6 +9,7 @@ Port::Port(HardwareSerial *serial) {
 	_start_last = false;
 	_end_last = false;
 	_packet_start_rcvd = false;
+	_buffer.reserve(64);
 }
 
 void Port::read() {
