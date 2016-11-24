@@ -25,9 +25,9 @@ Message::Message(byte messageID, byte targetService, byte sourceService, byte ty
 vector<packet_t> Message::toPackets() {
 	// Generates bytestream 
 	deque<byte> bytes; 
-	bytes[] = _messageHeader.numOfPacketsInMessage;
-	bytes[] = _messageHeader.typeOfMessage;
-	bytes[] = _messageHeader.messageBitfields;
+	bytes.push_back(_messageHeader.numOfPacketsInMessage);
+	bytes.push_back(_messageHeader.typeOfMessage);
+	bytes.push_back(_messageHeader.messageBitfields);
 	bytes.insert(bytes.end(), _bodyContent.begin(), _bodyContent.end());
 	vector<packet_t> packets;
 	PacketHandler handler;
