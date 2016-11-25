@@ -18,8 +18,8 @@ private:
 
 
 public:
-	Port(HardwareSerial *serial);
-	int id;
+	Port(int id, HardwareSerial *serial);
+	int _id;
 	void read();
 
 	void write(vector<byte> serializedPacket);

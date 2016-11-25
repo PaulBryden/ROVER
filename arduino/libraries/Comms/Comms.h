@@ -21,6 +21,7 @@
 
 extern MessageQueue messageQueue;
 extern vector<Port> portList;
+
 extern ServiceTable serviceTable;
 extern PacketHandler handle;
 
@@ -29,6 +30,7 @@ class Comms {
 
 
 public:
+	Comms();
 	void sendMessage(Message m);
 
 	void checkMessages();

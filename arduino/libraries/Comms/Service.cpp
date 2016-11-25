@@ -1,17 +1,13 @@
 #include "Service.h"
 #include "Comms.h"
 
-Service::Service(byte id, string name) {
-	_id = id;
-	_name = name;
-	_local = true;
-}
-
 Service::Service(byte id, string name, bool local) {
 	_id = id;
 	_name = name;
 	_local = local;
 }
+
+Service::~Service() {}
 
 
 /* Returns the ID number of the service. */
@@ -29,6 +25,7 @@ string Service::getName() {
 Requires that there is an outgoing port - check getShortestDistance > 0 first. */
 
 Port Service::getOutgoingPort() {
+	//return portList[1];
 	int p; // port number
 	int d = -1;
 	for (map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {

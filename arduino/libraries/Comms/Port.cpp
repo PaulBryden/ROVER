@@ -4,7 +4,8 @@
 #define STARTBYTE 0xfe
 #define ENDBYTE 0xff
 
-Port::Port(HardwareSerial *serial) {
+Port::Port(int id, HardwareSerial *serial) {
+	_id = id;
 	_serial = serial;
 	_start_last = false;
 	_end_last = false;

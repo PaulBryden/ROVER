@@ -16,12 +16,12 @@ class Service {
 private:
 	byte _id;
 	string _name;
-	map<int, int> _portMap;
+	map<int, int> _portMap; // port id to distance
 	bool _local;
 
 public:
-	Service(byte id, string name);
 	Service(byte id, string name, bool local);
+	~Service();
 	byte getId();
 	string getName();
 	Port getOutgoingPort();

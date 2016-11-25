@@ -1,5 +1,8 @@
 #include "Comms.h"
 
+Comms::Comms() {
+}
+
 void Comms::sendMessage(Message m) {
 	vector<packet_t> packets;
 	packets = m.toPackets();
@@ -29,12 +32,22 @@ void Comms::checkMessages() {
 
 
 void Comms::initialiseNode(Port* serials[]) {
+	int i=0;
+	//portList = malloc(1024);
+	portList.push_back(*(serials[0]));
+	portList.push_back(*(serials[1]));
+	portList.push_back(*(serials[2]));
+	//portList[3] = *(serials[3]);
 	// TODO initialise static variables?
-	//vector<Port> portList(ports, ports + sizeof ports / sizeof ports[0]);
-	//vector<Port> portList;
-	for (int i = 0; i < (sizeof(*serials) / sizeof(serials[0])); i++) {
-		portList[i] = *serials[i];
-	}
+	//int i = 0;
+
+	//while (i < 3){
+	//	portList.push_back(*serials[i]);
+	//	i++;
+	//}
+	//for (i = 0; 3 > i ; ++i){// (sizeof(*serials) / sizeof(serials[0])); i++) {
+	//	portList[i] = *(serials[i]);
+	//}
 	
 	// TODO Do resource discovery stuff
 }
