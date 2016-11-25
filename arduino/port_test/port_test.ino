@@ -1,4 +1,15 @@
 #include <Types.h>
+#include <ServiceTable.h>
+#include <Port.h>
+#include <Comms.h>
+#include <DummyPort.h>
+#include <Service.h>
+#include <PacketHandler.h>
+#include <Message.h>
+#include <PacketQueue.h>
+#include <MessageQueue.h>
+
+#include <Types.h>
 #include <string>
 #include <stdlib.h> // for malloc
 void* operator new(unsigned int size, void* v) { 
