@@ -3,15 +3,19 @@
 
 #include "Message.h"
 
-#ifdef Arduino_h
+#ifndef NOARDUINO
 #include "Port.h"
-#else
-#include "DummyPort.h"
 #endif
 
-MessageQueue messageQueue;
-vector<Port> portList;
-ServiceTable serviceTable;
+#include "MessageQueue.h"
+#include "ServiceTable.h"
+#include <iterator>
+#include <vector>
+
+
+extern MessageQueue messageQueue;
+extern vector<Port> portList;
+extern ServiceTable serviceTable;
 
 class Comms {
 

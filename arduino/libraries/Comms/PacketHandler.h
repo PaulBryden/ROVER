@@ -2,15 +2,15 @@
 #define PacketHandler_h
 #include "Types.h"
 
-#ifdef Arduino_h
-#include "Port.h"
+#ifdef NOARDUINO
+#include <cstring>
 #else
-#include "DummyPort.h"
+#include "Port.h"
 #endif
 
-#include <cstring>
 #include <iterator>
 #include <vector>
+
 class PacketHandler {
 
 
