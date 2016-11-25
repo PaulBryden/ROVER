@@ -1,7 +1,9 @@
 #ifndef Comms_h
 #define Comms_h
 
+#include "Types.h"
 #include "Message.h"
+#include "PacketHandler.h"
 
 #ifndef NOARDUINO
 #include "Port.h"
@@ -16,6 +18,7 @@
 extern MessageQueue messageQueue;
 extern vector<Port> portList;
 extern ServiceTable serviceTable;
+extern PacketHandler handle;
 
 class Comms {
 
@@ -25,7 +28,7 @@ public:
 
 	void checkMessages();
 
-	void initialiseNode(Port ports[]);
+	void initialiseNode(Port* serials[]);
 };
 
 #endif
