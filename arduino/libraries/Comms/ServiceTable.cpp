@@ -1,7 +1,7 @@
 #include "ServiceTable.h"
 
 ServiceTable::ServiceTable() {
-
+	
 }
 
 /* Returns the service with a given id. */
