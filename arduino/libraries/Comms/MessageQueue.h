@@ -10,6 +10,7 @@ public:
 	void addMessage(Message m);
 	void addPriorityMessage(Message m);
 	
+	deque<Message> getMessageQueue();
 	Message popMessage();
 };
 

@@ -17,3 +17,12 @@ Message MessageQueue::popMessage() {
 	messageQueue.pop_front();
 	return m;
 }
+
+//Added for testing
+deque<Message> MessageQueue::getMessageQueue(){
+	return messageQueue;
+}
+
+int MessageQueue:queueSize(){
+	return messageQueue.size();
+}

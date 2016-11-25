@@ -1,6 +1,7 @@
 #include "PacketQueue.h"
 #include "Types.h"
 #include <iostream>
+
 deque<packet_t> packetQueue;
 void PacketQueue::addPacket(packet_t p) {
 	packetQueue.push_back(p);
