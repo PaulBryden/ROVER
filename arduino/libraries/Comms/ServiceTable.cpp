@@ -7,12 +7,6 @@ ServiceTable::ServiceTable() {
 ServiceTable::~ServiceTable() {
 }
 
-<<<<<<< HEAD
-ServiceTable::~ServiceTable() {
-}
-
-=======
->>>>>>> 80c05bef427cbc534397e031ab93e1cb01489e83
 /* Returns the service with a given id. */
 Service* ServiceTable::getService(byte id) {
 	return _table[id];
