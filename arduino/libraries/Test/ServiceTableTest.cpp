@@ -1,10 +1,8 @@
+
+//#include "../Comms/Comms.cpp"
 #include "../Comms/ServiceTable.cpp"
-
-
-#include "../Comms/ServiceTable.h"
 #include "../Comms/Service.cpp"
-#include "../Comms/Service.h"
-#include "../Comms/Comms.cpp"
+
 
 #include <stdio.h>
 
