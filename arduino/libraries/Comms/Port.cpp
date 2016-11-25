@@ -13,7 +13,7 @@ Port::Port(HardwareSerial *serial) {
 }
 
 void Port::read() {
-	while (_serial->available > 0) {
+	while (_serial->available() > 0) {
 		byte b = _serial->read();
 		if (b == STARTBYTE) {
 			if (_start_last) { // byte-stuffed start byte
@@ -25,7 +25,7 @@ void Port::read() {
 				// packet end
 				packet_t p = getPacketFromBuffer();
 				// send the packet to the packet queue
-				// clear the buffer
+				_buffer.clear();
 				_packet_start_rcvd = false;
 			} else {
 				_start_last = true;
@@ -44,12 +44,13 @@ void Port::read() {
 		} else {
 			if (_start_last) {
 				// start of new packet
-				// clear the buffer
+				_buffer.clear();
 				_start_last = false;
 				_packet_start_rcvd = true;
 			} else if (_end_last) {
 				// something went wrong - we have a single end byte
-				// clear the buffer
+				_buffer.clear();
+				_end_last = false;
 				_packet_start_rcvd = false;
 			}
 			if (_packet_start_rcvd) {
@@ -60,10 +61,21 @@ void Port::read() {
 }
 
 void Port::write(vector<byte> packet) {
-    std::vector<byte>::const_iterator it;
+    /*std::vector<byte>::const_iterator it;
 	for (it = packet.begin(); it != packet.end(); ++it) {
     	_serial->write(*it);
+	}*/
+	_serial->write(STARTBYTE);
+	string s = (string) packet;
+	byte b;
+	for (int i = 0; i < s.len(); i++) {
+		b = s[i];
+		_serial->write(b);
+		if (b == STARTBYTE || b == ENDBYTE) 
+			_serial->write(b);
 	}
+	_serial->write(ENDBYTE);
+	_serial->write(STARTBYTE);
 }
 
 packet_t Port::getPacketFromBuffer() {
