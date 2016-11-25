@@ -23,6 +23,6 @@ deque<Message> MessageQueue::getMessageQueue(){
 	return messageQueue;
 }
 
-int MessageQueue:queueSize(){
+int MessageQueue::queueSize(){
 	return messageQueue.size();
 }

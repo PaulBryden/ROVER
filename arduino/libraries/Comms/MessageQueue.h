@@ -12,6 +12,7 @@ public:
 	
 	deque<Message> getMessageQueue();
 	Message popMessage();
+	int queueSize();
 };
 
 #endif
