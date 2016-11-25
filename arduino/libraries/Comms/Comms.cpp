@@ -1,7 +1,6 @@
 #include "Comms.h"
 
 void Comms::sendMessage(Message m) {
-	// TODO - implement Comms::sendMessage
 	vector<packet_t> packets;
 	packets = m.toPackets();
 	
@@ -22,14 +21,15 @@ void Comms::sendMessage(Message m) {
 }
 
 void Comms::checkMessages() {
-	// TODO - implement Comms::checkMessages
-	Message message = messageQueue.popMessage();
-	message.readMessage();
+	while (messageQueue.queueSize() > 0) {
+		Message message = messageQueue.popMessage();
+		message.readMessage();
+	}
 }
 
 
 void Comms::initialiseNode(Port* serials[]) {
-	// TODO create static variables
+	// TODO initialise static variables?
 	//vector<Port> portList(ports, ports + sizeof ports / sizeof ports[0]);
 	//vector<Port> portList;
 	for (int i = 0; i < (sizeof(*serials) / sizeof(serials[0])); i++) {

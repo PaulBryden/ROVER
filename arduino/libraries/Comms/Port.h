@@ -21,7 +21,7 @@ public:
 	int id;
 	void read();
 
-	void write(vector<char> serializedPacket);
+	void write(vector<byte> serializedPacket);
 
 	packet_t getPacketFromBuffer();
 
