@@ -17,7 +17,7 @@ int blackbox(){
     return 0;
   }
 
-  table.addService(s1);
+  table.addService(&s1);
   Service * s2 = table.getService(id1);
 
   if (s2 == NULL){
