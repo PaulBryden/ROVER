@@ -27,6 +27,7 @@ void Comms::checkMessages() {
 	}
 }
 
+
 void Comms::initialiseNode(Port* serials[]) {
 	// TODO initialise static variables?
 	//vector<Port> portList(ports, ports + sizeof ports / sizeof ports[0]);

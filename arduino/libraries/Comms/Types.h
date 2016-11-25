@@ -9,20 +9,20 @@ typedef unsigned char byte;
 
 typedef struct
 {
-	unsigned char flags : 3;
-	unsigned char messageID : 5;
-	unsigned char targetService;
-	unsigned char sourceService;
-	unsigned char packetID;
-	unsigned char crc;
+	byte flags : 3;
+	byte messageID : 5;
+	byte targetService;
+	byte sourceService;
+	byte packetID;
+	byte crc;
 	
 } packet_header_t;
 
 typedef struct
 {
-	unsigned char numOfPacketsInMessage;
-	unsigned char typeOfMessage : 5;
-	unsigned char messageBitfields : 3;
+	byte numOfPacketsInMessage;
+	byte typeOfMessage;
+	byte messageBitfields;
 } message_header_t;
 
 typedef struct
@@ -31,5 +31,10 @@ typedef struct
 	vector<byte> dataContent;
 	
 } packet_t;
+
+#define PACKET_SIZE 64
+#define PACKET_HEADER_SIZE sizeof(packet_header_t)
+#define PACKET_CONTENT_SIZE PACKET_SIZE - PACKET_HEADER_SIZE
+#define MESSAGE_HEADER_SIZE 3
 
 #endif
