@@ -6,6 +6,7 @@
 #include <deque>
 class PacketQueue {
 
+	deque<packet_t> _queue;
 
 public:
 	void addPacket(packet_t p);

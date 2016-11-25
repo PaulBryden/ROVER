@@ -1,3 +1,11 @@
+#include <Types.h>
+#include <ServiceTable.h>
+#include <Port.h>
+#include <Service.h>
+#include <PacketHandler.h>
+#include <Message.h>
+#include <PacketQueue.h>
+#include <MessageQueue.h>
 #include <Comms.h>
 
 
@@ -7,8 +15,7 @@
  * folder of your sketchbook. 
  */
 
-#include <Comms.h>
-// the setup routine runs once when you press reset:
+// the setup routine runs once when you press reset: 
 void setup() {
   Serial.begin(9600);
   Comms test;
@@ -16,6 +23,7 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
+  Serial.println("h");
 }
 
 

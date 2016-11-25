@@ -66,9 +66,9 @@ void Port::write(vector<byte> packet) {
     	_serial->write(*it);
 	}*/
 	_serial->write(STARTBYTE);
-	string s = (string) packet;
+	string s(packet.begin(), packet.end());
 	byte b;
-	for (int i = 0; i < s.len(); i++) {
+	for (int i = 0; i < s.length(); i++) {
 		b = s[i];
 		_serial->write(b);
 		if (b == STARTBYTE || b == ENDBYTE) 

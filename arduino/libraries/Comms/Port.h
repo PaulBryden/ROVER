@@ -2,6 +2,7 @@
 #define Port_h
 #include <iterator>
 #include <vector>
+#include <string>
 #include "Types.h"
 
 class HardwareSerial;

@@ -1,17 +1,5 @@
 #include "Message.h"
-#include "PacketHandler.cpp"
 
-
-using namespace std;
-
-
-byte _messageID;
-byte _targetService;
-byte _sourceService;
-vector<byte> _bodyContent;
-//message_header_t _messageHeader;
-byte _typeOfMessage;
-byte _messageBitfields;
 
 /*
 * NEED TO WORK OUT HOW TO HAVE STRUCTRE BUT NOT POINTING

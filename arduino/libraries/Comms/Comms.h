@@ -19,7 +19,7 @@
 #include <vector>
 
 
-extern MessageQueue messageQueue = MessageQueue();
+extern MessageQueue messageQueue;
 extern vector<Port> portList;
 extern ServiceTable serviceTable;
 extern PacketHandler handle;

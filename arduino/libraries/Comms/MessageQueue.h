@@ -5,6 +5,8 @@
 
 class MessageQueue {
 
+private:
+	deque<Message> _queue;
 
 public:
 	void addMessage(Message m);
