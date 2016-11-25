@@ -7,8 +7,6 @@
 #include <stdio.h>
 
 class Message {
-
-
 public:
 	Message(byte messageID, byte targetService, byte sourceService, byte typeOfMessage, byte messageBitfields, vector<byte> bodyContent);
 	vector<packet_t> toPackets();
@@ -20,5 +18,4 @@ public:
 	vector<byte> _bodyContent;
 	void readMessage();
 };
-
 #endif

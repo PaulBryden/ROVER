@@ -11,6 +11,11 @@ private:
 	vector<byte> _buffer;
 	HardwareSerial* _serial;
 
+	bool _start_last;
+	bool _end_last;
+	bool _packet_start_rcvd;
+
+
 public:
 	Port(HardwareSerial *serial);
 	int id;

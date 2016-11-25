@@ -1,7 +1,9 @@
 #include "Message.h"
 #include "PacketHandler.cpp"
 
+
 using namespace std;
+
 
 byte _messageID;
 byte _targetService;
@@ -16,6 +18,7 @@ byte _messageBitfields;
 * TO THE SAME STRUCTURE EACH TIME, BUT A DIFFERENT ONE
 */
 
+
 Message::Message(byte messageID, byte targetService, byte sourceService, byte typeOfMessage, byte messageBitfields, vector<byte> bodyContent) {
 
 	_messageID = messageID;
@@ -24,11 +27,13 @@ Message::Message(byte messageID, byte targetService, byte sourceService, byte ty
 	_bodyContent = bodyContent;
 	
 	//Integer division always rounds down so adding one to give desired result
+
 	//_messageHeader.numOfPacketsInMessage = (byte)((MESSAGE_HEADER_SIZE + _bodyContent.size())/PACKET_CONTENT_SIZE) + 1;
 	_typeOfMessage = (byte)  typeOfMessage;
 	_messageBitfields = (byte) messageBitfields;
-}
 
+
+}
 vector<packet_t> Message::toPackets() {
 	// Generates bytestream 
 	deque<byte> bytes; 
@@ -39,7 +44,8 @@ vector<packet_t> Message::toPackets() {
 	vector<packet_t> packets;
 	PacketHandler handler;
 	 
-	for(int pNo = 0; bytes.size() > 0; pNo++){
+	
+	for(int pNo; bytes.size() > 0; pNo++){
 		vector<byte> tempByteVector;
 		packet_t tempPacket;
 		for(int i = 0; i < PACKET_CONTENT_SIZE; i++){
@@ -52,6 +58,7 @@ vector<packet_t> Message::toPackets() {
 	}
 	return packets;
 }
+
 
 
 //if resource discover 2/7 pass on if not serial.println
@@ -80,3 +87,4 @@ void Message::readMessage() {
 	}
 	fflush(stdout);
 }
+
