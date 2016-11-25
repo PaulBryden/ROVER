@@ -32,7 +32,7 @@ vector<packet_t> Message::toPackets() {
 	vector<packet_t> packets;
 	PacketHandler handler;
 	 
-	for(int pNo; bytes.size() > 0; pNo++){
+	for(int pNo = 0; bytes.size() > 0; pNo++){
 		vector<byte> tempByteVector;
 		packet_t tempPacket;
 		for(int i = 0; i < PACKET_CONTENT_SIZE; i++){
