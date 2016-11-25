@@ -1,6 +1,12 @@
 #include "Service.h"
 #include "Comms.h"
 
+Service::Service(byte id, string name) {
+	_id = id;
+	_name = name;
+	_local = true;
+}
+
 Service::Service(byte id, string name, bool local) {
 	_id = id;
 	_name = name;

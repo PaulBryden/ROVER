@@ -20,6 +20,7 @@ private:
 	bool _local;
 
 public:
+	Service(byte id, string name);
 	Service(byte id, string name, bool local);
 	~Service();
 	byte getId();
