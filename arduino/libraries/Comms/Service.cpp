@@ -16,6 +16,9 @@ Service::Service(byte id, string name, bool local) {
 Service::~Service() {
 }
 
+Service::~Service() {
+}
+
 /* Returns the ID number of the service. */
 byte Service::getId() {
 	return _id;
@@ -26,8 +29,12 @@ string Service::getName() {
 	return _name;
 }
 
+<<<<<<< HEAD
+/* Returns the port with the shortest associated distance to this service. */
+=======
 /* Returns the port with the shortest associated distance to this service. 
 Requires that there is an outgoing port - check getShortestDistance > 0 first. */
+>>>>>>> 80c05bef427cbc534397e031ab93e1cb01489e83
 Port Service::getOutgoingPort() {
 	int p; // port number
 	int d = -1;
@@ -42,8 +49,11 @@ Port Service::getOutgoingPort() {
 
 /* Returns the shortest distance associated with this service. */
 int Service::getShortestDistance() {
+<<<<<<< HEAD
+=======
 	if (_local)
 		return 0;
+>>>>>>> 80c05bef427cbc534397e031ab93e1cb01489e83
 	int d = -1;
 	for (map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
 		if (d < 0 || it->second < d) {

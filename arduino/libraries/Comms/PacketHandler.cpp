@@ -1,5 +1,7 @@
 #include "PacketHandler.h"
 #include <iostream>
+//having to include cstring to run
+#include <cstring>
 
 packet_t PacketHandler::createPacket(byte flags,byte messageID, byte packetID, byte targetService, byte sourceService, vector<byte> dataContent) {
 	packet_t packet;

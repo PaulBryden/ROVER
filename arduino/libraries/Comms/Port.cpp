@@ -1,6 +1,19 @@
 #include "Port.h"
 #include <HardwareSerial.h>
 
+<<<<<<< HEAD
+Port::Port(HardwareSerial *serial) {
+	_serial = serial;
+}
+
+void Port::read() {
+	// Read from _serial and add to _buffer
+	// TODO - implement Port::read
+}
+
+void Port::write(vector<char> packet) {
+	_serial->write("hi");
+=======
 #define STARTBYTE 0xfe
 #define ENDBYTE 0xff
 
@@ -64,6 +77,7 @@ void Port::write(vector<byte> packet) {
 	for (it = packet.begin(); it != packet.end(); ++it) {
     	_serial->write(*it);
 	}
+>>>>>>> 80c05bef427cbc534397e031ab93e1cb01489e83
 }
 
 packet_t Port::getPacketFromBuffer() {

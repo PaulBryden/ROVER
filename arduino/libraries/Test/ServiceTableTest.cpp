@@ -1,8 +1,11 @@
 #include "../Comms/ServiceTable.cpp"
+
+
 #include "../Comms/ServiceTable.h"
 #include "../Comms/Service.cpp"
 #include "../Comms/Service.h"
 #include "../Comms/Comms.cpp"
+
 #include <stdio.h>
 
 
@@ -17,7 +20,9 @@ int blackbox(){
     return 0;
   }
 
+
   table.addService(&s1);
+
   Service * s2 = table.getService(id1);
 
   if (s2 == NULL){
