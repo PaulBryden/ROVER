@@ -9,6 +9,8 @@
 
 #ifndef NOARDUINO
 #include "Port.h"
+#else
+#include "DummyPort.h"
 #endif
 
 #include "MessageQueue.h"
@@ -17,7 +19,7 @@
 #include <vector>
 
 
-extern MessageQueue messageQueue;
+extern MessageQueue messageQueue = MessageQueue();
 extern vector<Port> portList;
 extern ServiceTable serviceTable;
 extern PacketHandler handle;
