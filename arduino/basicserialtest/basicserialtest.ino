@@ -5,12 +5,23 @@ void setup() {
 }
 
 void loop() {
-  while (Serial.available()) {
-    Serial1.write(Serial.read());
+  if (Serial.available()) {
+    Serial.print("ME: ");
+    while (Serial.available()) {
+      delay(3);
+      byte b = Serial.read();
+      Serial1.write(b);
+      Serial.write(b);
+    }
+    Serial.println();
   }
-  while (Serial1.available()) {
-    Serial.write(Serial1.read());
+  if (Serial1.available()) {
+    Serial.print("PAUL: ");
+    while (Serial1.available()) {
+      delay(3);
+      Serial.write(Serial1.read());
+    }
+    Serial.println();
   }
 }
-
 
