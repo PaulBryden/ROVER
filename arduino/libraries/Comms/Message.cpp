@@ -7,7 +7,14 @@ byte _messageID;
 byte _targetService;
 byte _sourceService;
 vector<byte> _bodyContent;
-message_header_t _messageHeader;
+//message_header_t _messageHeader;
+byte _typeOfMessage;
+byte _messageBitfields;
+
+/*
+* NEED TO WORK OUT HOW TO HAVE STRUCTRE BUT NOT POINTING
+* TO THE SAME STRUCTURE EACH TIME, BUT A DIFFERENT ONE
+*/
 
 Message::Message(byte messageID, byte targetService, byte sourceService, byte typeOfMessage, byte messageBitfields, vector<byte> bodyContent) {
 
@@ -17,17 +24,17 @@ Message::Message(byte messageID, byte targetService, byte sourceService, byte ty
 	_bodyContent = bodyContent;
 	
 	//Integer division always rounds down so adding one to give desired result
-	_messageHeader.numOfPacketsInMessage = ((MESSAGE_HEADER_SIZE + _bodyContent.size())/PACKET_CONTENT_SIZE) + 1;
-	_messageHeader.typeOfMessage = typeOfMessage;
-	_messageHeader.messageBitfields = messageBitfields;
+	//_messageHeader.numOfPacketsInMessage = (byte)((MESSAGE_HEADER_SIZE + _bodyContent.size())/PACKET_CONTENT_SIZE) + 1;
+	_typeOfMessage = (byte)  typeOfMessage;
+	_messageBitfields = (byte) messageBitfields;
 }
 
 vector<packet_t> Message::toPackets() {
 	// Generates bytestream 
 	deque<byte> bytes; 
-	bytes.push_back(_messageHeader.numOfPacketsInMessage);
-	bytes.push_back(_messageHeader.typeOfMessage);
-	bytes.push_back(_messageHeader.messageBitfields);
+	//bytes.push_back(_messageHeader.numOfPacketsInMessage);
+	bytes.push_back(_typeOfMessage);
+	bytes.push_back(_messageBitfields);
 	bytes.insert(bytes.end(), _bodyContent.begin(), _bodyContent.end());
 	vector<packet_t> packets;
 	PacketHandler handler;
@@ -55,15 +62,15 @@ void Message::readMessage() {
 #define MT_STOP 0x08
 
 	// TODO - implement Message::readMessage
-	if (_messageHeader.typeOfMessage == 0x07) {
+	if (_typeOfMessage == MT_PASS_ON) {
 		//initate ResourceDiscover and pass on
 		printf("This is an RD message to pass on.\n");
 	}
-	else if (_messageHeader.typeOfMessage == MT_ADVERTISE) {
+	else if (_typeOfMessage == MT_ADVERTISE) {
 		//Advertisement
 		printf("This is an advertise message.\n");
 	}
-	else if (_messageHeader.typeOfMessage == MT_STOP) {
+	else if (_typeOfMessage == MT_STOP) {
 		//Inititate Resource Discovery and Stop
 		printf("This is a RD message, not to pass on!\n");
 	}
@@ -71,4 +78,5 @@ void Message::readMessage() {
 		//DEBUG
 		printf("This is not a resource discovery message.\n");
 	}
+	fflush(stdout);
 }
