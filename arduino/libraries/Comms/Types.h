@@ -6,7 +6,6 @@
 using namespace std;
 
 typedef unsigned char byte;
-
 typedef struct
 {
 	byte flags : 3;

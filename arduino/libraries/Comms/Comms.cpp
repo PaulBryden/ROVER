@@ -12,7 +12,7 @@ void Comms::sendMessage(Message m) {
 	Service * s = serviceTable.getService(target);
 	
 	if (s -> getShortestDistance() > 0 ) {
-		Port p = s -> getOutgoingPort();
+		int p = s -> getOutgoingPort();
 		
 		for (int i; packets.size() > i; i++) {
 			handle.sendPacket(packets[i], p);
@@ -31,12 +31,8 @@ void Comms::checkMessages() {
 }
 
 
-void Comms::initialiseNode(Port* serials[]) {
-	int i=0;
-	//portList = malloc(1024);
-	portList.push_back(*(serials[0]));
-	portList.push_back(*(serials[1]));
-	portList.push_back(*(serials[2]));
+void Comms::initialiseNode(std::vector<Port> serials) {
+	portList=serials;
 	//portList[3] = *(serials[3]);
 	// TODO initialise static variables?
 	//int i = 0;

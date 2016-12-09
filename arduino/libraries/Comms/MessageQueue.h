@@ -5,7 +5,6 @@
 
 class MessageQueue {
 
-private:
 	deque<Message> _queue;
 
 public:

@@ -17,7 +17,7 @@ class PacketHandler {
 public:
 	packet_t createPacket(byte flags,byte messageID, byte packetID, byte targetService, byte sourceService, vector<byte> dataContent);
 
-	void sendPacket(packet_t p, Port port);
+	void sendPacket(packet_t p, int port);
 
 	bool crcCheck(packet_t p);
 

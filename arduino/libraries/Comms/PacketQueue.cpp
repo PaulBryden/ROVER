@@ -1,13 +1,33 @@
 #include "PacketQueue.h"
 #include "Types.h"
 #include <iostream>
+#include "Comms.h"
+#include <HardwareSerial.h>
 
+PacketQueue::PacketQueue(){
+	
+}
 void PacketQueue::addPacket(packet_t p) {
 	_queue.push_back(p);
+	Serial.println("pushed packet to back of queue");
+	Message tempMessage = checkPacketQueue();
+	
+	Serial.print("Checking state of returned message");
+
+	Serial.print(tempMessage._bodyContent[0]);
+	return;
+	/**if(!(tempMessage._bodyContent[0]=='0')){
+		messageQueue.addMessage(tempMessage);
+	}*/
 }
 
 void PacketQueue::popPacket() {
-	_queue.pop_front();
+	
+	Serial.print("Starting Pop");
+	_queue.erase (_queue.begin(),_queue.begin()+1);
+	
+	Serial.print("Finished Pop");
+
 }
 
 Message PacketQueue::checkPacketQueue() {
@@ -56,7 +76,8 @@ Message PacketQueue::checkPacketQueue() {
 				//cout << hex <<int( _queue[0].packetHeader.messageID) <<endl;
 				//cout << hex << int(_queue[0].packetHeader.packetID) << endl;
 				//cout << "Building Message" << endl;
-
+				
+				Serial.println("returning Build Message");
 
 				return buildMessage(messageTrack); //build the message and return it.
 			}
@@ -64,10 +85,18 @@ Message PacketQueue::checkPacketQueue() {
 	}
 	else {
 		//cout << "Popping Packet" << endl;
+		
+		Serial.println("Something Went wrong, popping packet");
 		popPacket(); //if first packet in queue is not the first packet in message. Something has gone wrong, so pop it.
 	}
-
-	//throw "no_message";
+	Serial.print("No Message found in queue stack");
+	vector<byte> bodyContent;
+	bodyContent.reserve(32);
+	bodyContent.push_back(0x00);
+	
+	Serial.print("Returning EMpty Message");
+	Message* emptyMessage = new Message(0x00,0x00,0x00,0x00,0x00,bodyContent);
+	return *emptyMessage;
 
 }
 

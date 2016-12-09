@@ -10,7 +10,7 @@ class Port {
 
 private:
 	vector<byte> _buffer;
-	HardwareSerial* _serial;
+	HardwareSerial *_serial;
 
 	bool _start_last;
 	bool _end_last;
