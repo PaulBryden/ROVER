@@ -30,11 +30,13 @@ void Comms::checkMessages() {
 
 void Comms::initialiseNode(Port* serials[]) {
 	// TODO initialise static variables?
+	
 	//vector<Port> portList(ports, ports + sizeof ports / sizeof ports[0]);
 	//vector<Port> portList;
 	for (int i = 0; i < (sizeof(*serials) / sizeof(serials[0])); i++) {
 		portList[i] = *serials[i];
 	}
 	
+	// TODO add local service to service table?
 	// TODO Do resource discovery stuff
 }
