@@ -4,8 +4,8 @@
 #include <string.h>
 #include <errno.h>
 
-#define STARTBYTE '#'
-#define ENDBYTE '+'
+#define STARTBYTE 0xFE
+#define ENDBYTE 0xFF
 int fd ;
 Port::Port(int id) {
 	_id = id;

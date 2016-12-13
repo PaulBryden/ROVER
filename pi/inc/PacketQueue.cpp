@@ -8,7 +8,6 @@ PacketQueue::PacketQueue(){
 }
 void PacketQueue::addPacket(packet_t p) {
 	_queue.push_back(p);
-	Message tempMessage = checkPacketQueue();
 	
 
 	return;
@@ -27,7 +26,7 @@ Message PacketQueue::checkPacketQueue() {
 
 	vector<packet_t> messageTrack; //keep track of packets which could potentially create entire message
 	vector<int> packetIndexRemove;
-	if (_queue.front().packetHeader.packetID == '1') { //if the first packet in buffer is the first packet of message
+	if (_queue.front().packetHeader.packetID == 1) { //if the first packet in buffer is the first packet of message
 		cout << "packetID=1" << endl;
 		cout << "_queue.size() = ";
 		cout << hex << _queue.size() << endl;
@@ -98,6 +97,7 @@ Message PacketQueue::buildMessage(vector<packet_t> p) {
 	byte messageBitfields = p[0].dataContent[1] & 0x7;
 	vector<byte> bodyContent;
 
+				cout << hex <<int( messageID) <<endl;
 	for (int i = 0; i < p.size(); i++) { //grab body content from each of the packets and push it to bodycontent var
 		if (i == 0) {
 			int y = 2; //if this is first packet, skip message header

@@ -4,8 +4,8 @@
 #include <string.h>
 #include <errno.h>
 
-#define STARTBYTE '#'
-#define ENDBYTE '+'
+#define STARTBYTE 0xFE
+#define ENDBYTE 0xFF
 int fd ;
 Port::Port(int id) {
 	_id = id;
@@ -29,7 +29,7 @@ void Port::read() {
 	}
   while (serialDataAvail(fd)  > 0) {
     byte b = serialGetchar (fd) ;
-    printf ("%c\n",b);
+    printf ("%d\n",int(b));
     if (b == STARTBYTE) {
       if (_start_last) { // byte-stuffed start byte
         if (_packet_start_rcvd) {
@@ -50,10 +50,12 @@ void Port::read() {
 			}
 			
 		printf ("SENDING PACKET TO QUEUE");
+		fflush(stdout);
           // send the packet to the packet queue
           _buffer.clear();
           _packet_start_rcvd = false;
-		  packetQueue.checkPacketQueue();
+		 try {  messageQueue.addMessage(packetQueue.checkPacketQueue()); } catch (const std::exception&) { printf("Error, no packet returned from checkpacketqueue"); }
+		 
         }
       } 
       else {
