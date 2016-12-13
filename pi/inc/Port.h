@@ -2,7 +2,6 @@
 #define Port_h
 #include <vector>
 #include "Types.h"
-#include <Comms.h>
 
 class Port {
 

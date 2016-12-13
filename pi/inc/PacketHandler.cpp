@@ -2,8 +2,6 @@
 #include <iostream>
 //having to include cstring to run
 #include <cstring>
-#include <Port.h>
-#include <Comms.h>
 packet_t PacketHandler::createPacket(byte flags,byte messageID, byte packetID, byte targetService, byte sourceService, vector<byte> dataContent) {
 	packet_t packet;
 	packet_header_t packetHeader;
@@ -21,6 +19,7 @@ packet_t PacketHandler::createPacket(byte flags,byte messageID, byte packetID, b
 }
 
 void PacketHandler::sendPacket(packet_t p, int port) {
+	cout <<"Send Packet Back";
 	vector<byte> serializedPacket;
 	
 	byte size= sizeof(p.packetHeader)+p.dataContent.size(); //get total packet size

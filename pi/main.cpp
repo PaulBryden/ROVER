@@ -27,13 +27,15 @@ static std::map<int,int> servicePortMap; //WIll be specific to individual arduin
   static Port p3(2, &Serial3);*/
 // the setup routine runs once when you press reset: 
 void setup() {
-	Service s1(1, "Service1",true);
-	Service s2(2, "Service2",false);
+	static string service1String ="Service1";
+	static string service2String= "Service2";
+	Service s1(0, service1String,true);
+	Service s2(1, service2String,false);
 	serviceTable.addService(&s1);
 	serviceTable.addService(&s2);
 
-	s1.setPortDistance(0,0); 
-	s2.setPortDistance(0,1);
+	s1.setPortDistance(0,0);
+	s2.setPortDistance(0,0);
 	portList.push_back(&p0);
 }
 

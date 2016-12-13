@@ -15,15 +15,15 @@ class Service {
 
 private:
 	byte _id;
-	char* _name;
+	string _name;
 	std::map<int, int> _portMap; // port id to distance
 	bool _local;
 
 public:
-	Service(byte id, char* name, bool local);
+	Service(byte id, string name, bool local);
 	~Service();
 	byte getId();
-	char* getName();
+	string getName();
 	int getOutgoingPort();
 	int getShortestDistance();
 	int getShortestDistancePort();

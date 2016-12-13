@@ -4,10 +4,6 @@
 #include <Types.h>
 #include <Message.h>
 #include <Message.cpp>
-#include <PacketHandler.h>
-#include <PacketHandler.cpp>
-#include <PacketQueue.h>
-#include <PacketQueue.cpp>
 #ifndef NOARDUINO
 #include <Port.h>
 
@@ -26,14 +22,18 @@
 #include <iterator>
 #include <vector>
 
-
-static PacketQueue packetQueue;
+extern PacketHandler handle;
 static MessageQueue messageQueue;
 static vector<Port*> portList;
 static ServiceTable serviceTable;
-extern PacketHandler handle;
+
+#include <PacketQueue.h>
+#include <PacketQueue.cpp>
+static PacketQueue packetQueue;
 
 
+#include <PacketHandler.h>
+#include <PacketHandler.cpp>
 class Comms {
 
 

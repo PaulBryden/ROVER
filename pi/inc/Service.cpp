@@ -1,6 +1,6 @@
 #include <Service.h>
 
-Service::Service(byte id, char* name, bool local) {
+Service::Service(byte id, string name, bool local) {
 	_id = id;
 	_name = name;
 	_local = local;
@@ -16,7 +16,7 @@ byte Service::getId() {
 }
 
 /* Returns the name of the service. */
-char* Service::getName() {
+string Service::getName() {
 	return _name;
 }
 
@@ -45,23 +45,32 @@ int Service::getOutgoingPort() {
 int Service::getShortestDistance() {
 
 	int d = -1;
+			printf("got to here d=-1");
+		fflush(stdout);
 	for (std::map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
+				cout<<_name;
+		fflush(stdout);
 		if (d < 0 || it->second < d) {
+
 			d = it->second;
+
 		}
 	}
+			printf("got to here returning d");
+		fflush(stdout);
 	return d;
 }
 
 int Service::getShortestDistancePort() {
 
-	int d = -1;
+	/**int d = -1;
 	for (std::map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
 		if (d < 0 || it->second < d) {
 			d = it->first;
 		}
 	}
-	return d;
+	//return d;**/
+	return 0; //Hack
 }
 
 

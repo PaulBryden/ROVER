@@ -5,12 +5,12 @@
 #ifdef NOARDUINO
 #include <cstring>
 #else
-#include <Port.h>
 #endif
 
+#include <Port.h>
 #include <iterator>
 #include <vector>
-
+#include <Comms.h>
 class PacketHandler {
 
 

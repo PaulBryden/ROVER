@@ -4,6 +4,8 @@
 #include <Message.h>
 #include <iterator>
 #include <deque>
+#include <Comms.h>
+#include <PacketHandler.h>
 class PacketQueue {
 
 	deque<packet_t> _queue;

@@ -6,7 +6,7 @@ Comms::Comms() {
 void Comms::sendMessage(Message m) {
 	vector<packet_t> packets;
 	packets = m.toPackets();
-	
+	PacketHandler handle;
 	byte target = m._targetService;
 	
 	Service * s = serviceTable.getService(target);
@@ -15,6 +15,7 @@ void Comms::sendMessage(Message m) {
 		int p = s -> getOutgoingPort();
 		
 		for (int i; packets.size() > i; i++) {
+			
 			handle.sendPacket(packets[i], p);
 		}
 	} else {

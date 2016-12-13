@@ -2,7 +2,7 @@
 #define MessageQueue_h
 
 #include <Message.h>
-
+#include <iostream>
 class MessageQueue {
 
 	deque<Message> _queue;

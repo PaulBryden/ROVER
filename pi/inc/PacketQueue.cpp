@@ -1,20 +1,28 @@
 #include <PacketQueue.h>
 #include <Types.h>
 #include <iostream>
-#include <Comms.h>
 #include <Port.h>
 #include <PacketHandler.h>
 PacketQueue::PacketQueue(){
 	
 }
 void PacketQueue::addPacket(packet_t p) {
-	if(*(serviceTable.getService(p.packetHeader.targetService)).getShortestDistance){
-		PacketHandler newPacketHandler;
-		newPacketHandler.sendPacket(p,serviceTable.getService(p.packetHeader.targetService)).getShortestDistancePort);
+	printf("entered add packet");
+	fflush(stdout);
+	try{
+		cout<<serviceTable.getService(p.packetHeader.targetService)->getId();
+		fflush(stdout);
+	if((serviceTable.getService(p.packetHeader.targetService)->getName()!="0")||(serviceTable.getService(p.packetHeader.targetService)->getShortestDistance())){ //dirty hack for the moment until proper error handling
 		
-	}
-	
+		printf("about to send packet back");
+		PacketHandler newPacketHandler;
+		newPacketHandler.sendPacket(p,((serviceTable.getService(p.packetHeader.targetService))->getShortestDistancePort()));
+		
+	} }catch (const std::exception&) { printf("Error, nae service with that name mate"); return;}
+	try{
+	if(serviceTable.getService(p.packetHeader.targetService)->getName()!="0"){
 	_queue.push_back(p);
+	} }catch (const std::exception&) { printf("Error, nae service with that name mate"); }
 	
 
 	return;

@@ -9,7 +9,13 @@ ServiceTable::~ServiceTable() {
 
 /* Returns the service with a given id. */
 Service* ServiceTable::getService(byte id) {
+	printf("got to here");
+	fflush(stdout);
+	if(_table.size()>id){
+		printf("got to here %d",id);
+		fflush(stdout);
 	return _table[id];
+	}else{ static Service newService(0,"0",false); return &newService;}
 }
 
 /* Adds a service to the look-up table. Existing service will be merged into if present. */

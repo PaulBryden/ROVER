@@ -6,7 +6,6 @@
 #include <iterator>
 #include <vector>
 #include <deque>
-
 class Message {
 //private:
 	//byte _messageID;
