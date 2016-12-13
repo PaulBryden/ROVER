@@ -10,9 +10,11 @@
 #include <PacketQueue.cpp>
 #ifndef NOARDUINO
 #include <Port.h>
+
 #else
 #include <DummyPort.h>
 #include <Port.h>
+
 #endif
 
 #include <MessageQueue.h>
@@ -27,8 +29,7 @@
 
 static PacketQueue packetQueue;
 static MessageQueue messageQueue;
-static vector<Port> portList;
-
+static vector<Port*> portList;
 static ServiceTable serviceTable;
 extern PacketHandler handle;
 
@@ -42,7 +43,7 @@ public:
 
 	void checkMessages();
 
-	void initialiseNode(std::vector<Port> serials);
+	void initialiseNode(std::vector<Port*> serials);
 };
 
 #endif

@@ -1,4 +1,4 @@
-#include <Port.h>
+#include <PortPi.h>
 #include <Comms.h>
 #include <stdio.h>
 #include <string.h>
@@ -6,8 +6,8 @@
 
 #define STARTBYTE 0xFE
 #define ENDBYTE 0xFF
-int fd ;
-Port::Port(int id) {
+int fd;
+PortPi::PortPi(int id) {
 	_id = id;
 	_start_last = false;
 	_end_last = false;
@@ -23,7 +23,7 @@ Port::Port(int id) {
 
 }
 
-void Port::read() {
+void PortPi::read() {
 	for(int i=0;i<_buffer.size();i++){
 	
 	}
@@ -101,7 +101,7 @@ void Port::read() {
   }
 }
 
-void Port::write(vector<byte> packet) {
+void PortPi::write(vector<byte> packet) {
     /*std::vector<byte>::const_iterator it;
 	for (it = packet.begin(); it != packet.end(); ++it) {
     	_serial->write(*it);
@@ -119,7 +119,7 @@ void Port::write(vector<byte> packet) {
 	 serialPutchar (fd, STARTBYTE) ;
 }
 
-packet_t Port::getPacketFromBuffer() {
+packet_t PortPi::getPacketFromBuffer() {
 	// Check if buffer has complete packet, if so return
 	// TODO - implement Port::getPacketFromBuffer
 	packet_header_t tempPacketHeader;

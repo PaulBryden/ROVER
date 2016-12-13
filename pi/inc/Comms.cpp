@@ -31,7 +31,7 @@ void Comms::checkMessages() {
 }
 
 
-void Comms::initialiseNode(std::vector<Port> serials) {
+void Comms::initialiseNode(std::vector<Port*> serials) {
 	portList=serials;
 	//portList[3] = *(serials[3]);
 	// TODO initialise static variables?

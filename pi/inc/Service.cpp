@@ -4,6 +4,7 @@ Service::Service(byte id, char* name, bool local) {
 	_id = id;
 	_name = name;
 	_local = local;
+
 }
 
 Service::~Service() {}
@@ -18,6 +19,7 @@ byte Service::getId() {
 char* Service::getName() {
 	return _name;
 }
+
 
 
 /* Returns the port with the shortest associated distance to this service. 
@@ -51,8 +53,11 @@ int Service::getShortestDistance() {
 	return d;
 }
 
+
+
 /* Sets the associated distance for this service on a particular port. Will only 
-overwrite an existing entry if the new distance is less than the old distance. */
+overwrite an existing entry if the new distance is less than the old distance.
+Or adds it if the port doesnt already exist. */
 void Service::setPortDistance(int port, int distance) {
 	if (_portMap.find(port) == _portMap.end()
 		|| _portMap[port] > distance) {
