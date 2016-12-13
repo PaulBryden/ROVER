@@ -1,10 +1,9 @@
-#include "Port.h"
-#include <HardwareSerial.h>
+#include "SerialPort.h"
 
 #define STARTBYTE 0xfe
 #define ENDBYTE 0xff
 
-Port::Port(HardwareSerial *serial) {
+SerialPort::SerialPort(HardwareSerial *serial) {
 	_serial = serial;
 	_start_last = false;
 	_end_last = false;
@@ -12,7 +11,7 @@ Port::Port(HardwareSerial *serial) {
 	_buffer.reserve(64);
 }
 
-void Port::read() {
+void SerialPort::read() {
 	while (_serial->available() > 0) {
 		byte b = _serial->read();
 		if (b == STARTBYTE) {
@@ -60,7 +59,7 @@ void Port::read() {
 	}
 }
 
-void Port::write(vector<byte> packet) {
+void SerialPort::write(vector<byte> packet) {
     /*std::vector<byte>::const_iterator it;
 	for (it = packet.begin(); it != packet.end(); ++it) {
     	_serial->write(*it);
@@ -71,14 +70,14 @@ void Port::write(vector<byte> packet) {
 	for (int i = 0; i < s.len(); i++) {
 		b = s[i];
 		_serial->write(b);
-		if (b == STARTBYTE || b == ENDBYTE) 
+		if (b == STARTBYTE || b == ENDBYTE)
 			_serial->write(b);
 	}
 	_serial->write(ENDBYTE);
 	_serial->write(STARTBYTE);
 }
 
-packet_t Port::getPacketFromBuffer() {
+packet_t SerialPort::getPacketFromBuffer() {
 	// Check if buffer has complete packet, if so return
 	// TODO - implement Port::getPacketFromBuffer
 	packet_t testPacket;

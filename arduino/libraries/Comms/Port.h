@@ -1,15 +1,12 @@
 #ifndef Port_h
 #define Port_h
-#include <iterator>
 #include <vector>
 #include "Types.h"
 
-class HardwareSerial;
 class Port {
 
 private:
 	vector<byte> _buffer;
-	HardwareSerial* _serial;
 
 	bool _start_last;
 	bool _end_last;
@@ -17,13 +14,12 @@ private:
 
 
 public:
-	Port(HardwareSerial *serial);
-	int id;
-	void read();
+	virtual int id = 0;
+	virtual void read() =0;
 
-	void write(vector<byte> serializedPacket);
+	virtual void write(vector<byte> serializedPacket) =0;
 
-	packet_t getPacketFromBuffer();
+	virtual packet_t getPacketFromBuffer() = 0;
 
 };
 
