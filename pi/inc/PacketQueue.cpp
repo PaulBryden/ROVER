@@ -2,11 +2,17 @@
 #include <Types.h>
 #include <iostream>
 #include <Comms.h>
-
+#include <Port.h>
+#include <PacketHandler.h>
 PacketQueue::PacketQueue(){
 	
 }
 void PacketQueue::addPacket(packet_t p) {
+	if(*(serviceTable.getService(p.packetHeader.targetService)).getShortestDistance){
+		PacketHandler newPacketHandler;
+		newPacketHandler.sendPacket(p,serviceTable.getService(p.packetHeader.targetService)).getShortestDistancePort);
+		
+	}
 	
 	_queue.push_back(p);
 	

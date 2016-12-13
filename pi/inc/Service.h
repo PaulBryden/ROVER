@@ -26,6 +26,7 @@ public:
 	char* getName();
 	int getOutgoingPort();
 	int getShortestDistance();
+	int getShortestDistancePort();
 	void setPortDistance(int port, int distance);
 	std::map<int, int> getPortMap();
 };

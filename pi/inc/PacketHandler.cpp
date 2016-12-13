@@ -2,7 +2,8 @@
 #include <iostream>
 //having to include cstring to run
 #include <cstring>
-
+#include <Port.h>
+#include <Comms.h>
 packet_t PacketHandler::createPacket(byte flags,byte messageID, byte packetID, byte targetService, byte sourceService, vector<byte> dataContent) {
 	packet_t packet;
 	packet_header_t packetHeader;
@@ -42,6 +43,8 @@ void PacketHandler::sendPacket(packet_t p, int port) {
 	serializedPacket.push_back (0xFF); //ADD END BYTE(s)
 	serializedPacket.push_back(0xFE);
 
+	Port* transferPort = portList[port];
+	transferPort->write(serializedPacket);
 	//std::cout <<"Printing byte stuffed packet1copy" <<endl;
 	//for (std::vector<byte>::const_iterator i = serializedPacket.begin(); i != serializedPacket.end(); ++i)
 	//	cout << hex << int(*i) << ' ';

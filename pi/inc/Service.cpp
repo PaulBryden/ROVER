@@ -53,6 +53,17 @@ int Service::getShortestDistance() {
 	return d;
 }
 
+int Service::getShortestDistancePort() {
+
+	int d = -1;
+	for (std::map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
+		if (d < 0 || it->second < d) {
+			d = it->first;
+		}
+	}
+	return d;
+}
+
 
 
 /* Sets the associated distance for this service on a particular port. Will only 
