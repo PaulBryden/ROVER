@@ -28,19 +28,19 @@ void PacketHandler::sendPacket(packet_t p, int port) {
 	memcpy(b+ sizeof(p.packetHeader), &p.dataContent[0], p.dataContent.size());//copy header to first part of byte array
 	//copy data content to remaining part of byte array
 	
-	serializedPacket.push_back (0xFE); //ADD START BYTE
-	
+	//serializedPacket.push_back (0xFE); //ADD START BYTE
+	 //Byte Stuffing now done in PORT this isnt needed anymore?
 	for( int index=0; index<size; index++){
 		serializedPacket.push_back (b[index]);
-		if (b[index]==0xFE){
+		/*if (b[index]==0xFE){
 			serializedPacket.push_back (0xFE);
 		}else if(b[index]==0xFF){
 			serializedPacket.push_back (0xFF);
-		}
+		}*/
 	}
 	
-	serializedPacket.push_back (0xFF); //ADD END BYTE(s)
-	serializedPacket.push_back(0xFE);
+	//serializedPacket.push_back (0xFF); //ADD END BYTE(s)
+	//serializedPacket.push_back(0xFE);
 
 	Port* transferPort = portList[port];
 	transferPort->write(serializedPacket);

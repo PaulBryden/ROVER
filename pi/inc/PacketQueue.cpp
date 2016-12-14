@@ -10,19 +10,25 @@ void PacketQueue::addPacket(packet_t p) {
 	printf("entered add packet");
 	fflush(stdout);
 	try{
-		cout<<serviceTable.getService(p.packetHeader.targetService)->getId();
+		cout<<serviceTable.getService(p.packetHeader.targetService)->getName();
 		fflush(stdout);
-	if((serviceTable.getService(p.packetHeader.targetService)->getName()!="0")||(serviceTable.getService(p.packetHeader.targetService)->getShortestDistance())){ //dirty hack for the moment until proper error handling
+	if((serviceTable.getService(p.packetHeader.targetService)->getName()!="0")&&(serviceTable.getService(p.packetHeader.targetService)->getShortestDistance())){ //dirty hack for the moment until proper error handling
 		
 		printf("about to send packet back");
 		PacketHandler newPacketHandler;
-		newPacketHandler.sendPacket(p,((serviceTable.getService(p.packetHeader.targetService))->getShortestDistancePort()));
+		int shortestDistancePort=((serviceTable.getService(p.packetHeader.targetService))->getShortestDistancePort());
+			if(shortestDistancePort>=portList.size()){
+				//SOmething has gone wrong, we dont have a map to this port ABORT ABORT!!!
+				cout <<"Error, port not mapped in list. Bad user configuration\n";
+				return;
+			}
+		newPacketHandler.sendPacket(p,shortestDistancePort);
 		
-	} }catch (const std::exception&) { printf("Error, nae service with that name mate"); return;}
-	try{
-	if(serviceTable.getService(p.packetHeader.targetService)->getName()!="0"){
+	}else if(serviceTable.getService(p.packetHeader.targetService)->getName()!="0"){
 	_queue.push_back(p);
-	} }catch (const std::exception&) { printf("Error, nae service with that name mate"); }
+	} }catch (const std::exception&) { printf("Error, nae service with that name mate"); return;}
+	
+	
 	
 
 	return;
@@ -41,7 +47,7 @@ Message PacketQueue::checkPacketQueue() {
 
 	vector<packet_t> messageTrack; //keep track of packets which could potentially create entire message
 	vector<int> packetIndexRemove;
-	if (_queue.front().packetHeader.packetID == 1) { //if the first packet in buffer is the first packet of message
+	if (_queue.size()>0&&_queue.front().packetHeader.packetID == 1) { //if the first packet in buffer is the first packet of message
 		cout << "packetID=1" << endl;
 		cout << "_queue.size() = ";
 		cout << hex << _queue.size() << endl;
@@ -50,7 +56,7 @@ Message PacketQueue::checkPacketQueue() {
 		messageTrack.push_back(_queue.front()); //add it to the potential packets list
 		packetIndexRemove.push_back(0);
 
-		if (_queue.size() >= _queue.front().dataContent[0]) { //if there are enough packets to build an entire message in the queue
+		if (_queue.size() >0 && _queue.front().dataContent[0]) { //if there are enough packets to build an entire message in the queue
 			cout << "Enough packets to build message" << endl;
 			byte counter = 1; //keep track of number of packets in message
 			for (int i = 1; i < _queue.size(); i++) { 
@@ -89,10 +95,10 @@ Message PacketQueue::checkPacketQueue() {
 			}
 		}
 	}
-	else {
-		cout << "Popping Packet" << endl;
+	else if (_queue.size()>0){
+			cout << "Popping Packet" << endl;
+			popPacket(); //if first packet in queue is not the first packet in message. Something has gone wrong, so pop it.
 		
-		popPacket(); //if first packet in queue is not the first packet in message. Something has gone wrong, so pop it.
 	}
 	vector<byte> bodyContent;
 	bodyContent.reserve(32);

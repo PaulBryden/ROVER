@@ -41,7 +41,7 @@ void PortPi::read() {
         if (_packet_start_rcvd) {
           // packet end
           packet_t p = getPacketFromBuffer();
-			packetQueue.addPacket(p);
+			packetQueue.addPacket(p); //try to add packet to queue, send on if required.
 			
 		printf ("Packet Contents:");
          	for(int i=0;i<_buffer.size();i++){
@@ -49,12 +49,13 @@ void PortPi::read() {
 				printf ("%d",int(_buffer[i]));
 			}
 			
-		printf ("SENDING PACKET TO QUEUE");
+		printf ("Testing Packet");
 		fflush(stdout);
           // send the packet to the packet queue
           _buffer.clear();
           _packet_start_rcvd = false;
-		 try {  messageQueue.addMessage(packetQueue.checkPacketQueue()); } catch (const std::exception&) { printf("Error, no packet returned from checkpacketqueue"); }
+		 try { Message newMessage=packetQueue.checkPacketQueue();  
+		 if(newMessage._messageID){messageQueue.addMessage(newMessage);} } catch (const std::exception&) { printf("Error, no packet returned from checkpacketqueue"); }
 		 
         }
       } 

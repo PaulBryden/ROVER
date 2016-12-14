@@ -26,18 +26,7 @@ string Service::getName() {
 Requires that there is an outgoing port - check getShortestDistance > 0 first. */
 
 int Service::getOutgoingPort() {
-	//return portList[1];
-	/**int p; // port number
-	int d = -1;
-	for (std::map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
-		if (d < 0 || it->second < d) {
-			
-  Serial.println(p);
-  delay(100);
-			d = it->second;
-			p = it->first;
-		}
-	}**/
+
 	return _portMap[_id];
 }
 
@@ -53,7 +42,6 @@ int Service::getShortestDistance() {
 		if (d < 0 || it->second < d) {
 
 			d = it->second;
-
 		}
 	}
 			printf("got to here returning d");
@@ -62,15 +50,17 @@ int Service::getShortestDistance() {
 }
 
 int Service::getShortestDistancePort() {
-
-	/**int d = -1;
+	/*NEED TO ADD INPUT VALIDATION TO ENSURE THAT WE RETURN A PORT IN THE LIST THAT ACTUALLY EXISTS!!*/
+	int d = -1;
 	for (std::map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
 		if (d < 0 || it->second < d) {
-			d = it->first;
+			
+			d = it->first; 
+			
 		}
 	}
-	//return d;**/
-	return 0; //Hack
+
+	return d;
 }
 
 

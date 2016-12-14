@@ -29,13 +29,13 @@ static std::map<int,int> servicePortMap; //WIll be specific to individual arduin
 void setup() {
 	static string service1String ="Service1";
 	static string service2String= "Service2";
-	Service s1(0, service1String,true);
-	Service s2(1, service2String,false);
+	static Service s1(0, service1String,true);
+	static Service s2(1, service2String,false); //NEEDS TO BE STATIC !!! once function ends, the object memory will be deallocated otherwise!!!
 	serviceTable.addService(&s1);
 	serviceTable.addService(&s2);
 
 	s1.setPortDistance(0,0);
-	s2.setPortDistance(0,0);
+	s2.setPortDistance(0,1);
 	portList.push_back(&p0);
 }
 
