@@ -1,17 +1,15 @@
 #include "Service.h"
 #include "Comms.h"
+#include <HardwareSerial.h>
 
-Service::Service(byte id, string name) {
-	_id = id;
-	_name = name;
-	_local = true;
-}
-
-Service::Service(byte id, string name, bool local) {
+#include "Arduino.h"
+Service::Service(byte id, char* name, bool local) {
 	_id = id;
 	_name = name;
 	_local = local;
 }
+
+Service::~Service() {}
 
 
 /* Returns the ID number of the service. */
@@ -20,7 +18,7 @@ byte Service::getId() {
 }
 
 /* Returns the name of the service. */
-string Service::getName() {
+char* Service::getName() {
 	return _name;
 }
 
@@ -28,23 +26,27 @@ string Service::getName() {
 /* Returns the port with the shortest associated distance to this service. 
 Requires that there is an outgoing port - check getShortestDistance > 0 first. */
 
-Port Service::getOutgoingPort() {
-	int p; // port number
+int Service::getOutgoingPort() {
+	//return portList[1];
+	/**int p; // port number
 	int d = -1;
-	for (map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
+	for (std::map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
 		if (d < 0 || it->second < d) {
+			
+  Serial.println(p);
+  delay(100);
 			d = it->second;
 			p = it->first;
 		}
-	}
-	return portList[p];
+	}**/
+	return _portMap[_id];
 }
 
 /* Returns the shortest distance associated with this service. */
 int Service::getShortestDistance() {
 
 	int d = -1;
-	for (map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
+	for (std::map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
 		if (d < 0 || it->second < d) {
 			d = it->second;
 		}
@@ -62,6 +64,6 @@ void Service::setPortDistance(int port, int distance) {
 }
 
 /* Returns the port map */
-map<int, int> Service::getPortMap() {
+std::map<int, int> Service::getPortMap() {
 	return _portMap;
 }

@@ -1,12 +1,21 @@
 #ifndef Message_h
 #define Message_h
+
 #include "Types.h"
+#include "PacketHandler.h"
 #include <iterator>
 #include <vector>
 #include <deque>
-#include <stdio.h>
 
 class Message {
+//private:
+	//byte _messageID;
+	//byte _targetService;
+	//byte _sourceService;
+	//vector<byte> _bodyContent;
+	//message_header_t _messageHeader;
+	//byte _typeOfMessage;
+	//byte _messageBitfields;
 public:
 	Message(byte messageID, byte targetService, byte sourceService, byte typeOfMessage, byte messageBitfields, vector<byte> bodyContent);
 	vector<packet_t> toPackets();

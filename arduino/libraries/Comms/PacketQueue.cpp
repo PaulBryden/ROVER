@@ -1,63 +1,83 @@
 #include "PacketQueue.h"
 #include "Types.h"
 #include <iostream>
+#include "Comms.h"
+#include <HardwareSerial.h>
 
-deque<packet_t> packetQueue;
+PacketQueue::PacketQueue(){
+	
+}
 void PacketQueue::addPacket(packet_t p) {
-	packetQueue.push_back(p);
+	_queue.push_back(p);
+	Serial.println("pushed packet to back of queue");
+	Message tempMessage = checkPacketQueue();
+	
+	Serial.print("Checking state of returned message");
+
+	Serial.print(tempMessage._bodyContent[0]);
+	return;
+	/**if(!(tempMessage._bodyContent[0]=='0')){
+		messageQueue.addMessage(tempMessage);
+	}*/
 }
 
 void PacketQueue::popPacket() {
-	packetQueue.pop_front();
+	
+	Serial.print("Starting Pop");
+	_queue.erase (_queue.begin(),_queue.begin()+1);
+	
+	Serial.print("Finished Pop");
+
 }
 
 Message PacketQueue::checkPacketQueue() {
 
 	vector<packet_t> messageTrack; //keep track of packets which could potentially create entire message
 	vector<int> packetIndexRemove;
-	if (packetQueue.front().packetHeader.packetID == 1) { //if the first packet in buffer is the first packet of message
+	if (_queue.front().packetHeader.packetID == 1) { //if the first packet in buffer is the first packet of message
 		//cout << "packetID=1" << endl;
-		//cout << "packetQueue.size() = ";
-		//cout << hex << packetQueue.size() << endl;
-		//cout << "packetQueueDataContent";
-		//cout << hex << packetQueue.front().dataContent.at(0) << endl;
-		messageTrack.push_back(packetQueue.front()); //add it to the potential packets list
+		//cout << "_queue.size() = ";
+		//cout << hex << _queue.size() << endl;
+		//cout << "_queueDataContent";
+		//cout << hex << _queue.front().dataContent.at(0) << endl;
+		messageTrack.push_back(_queue.front()); //add it to the potential packets list
 		packetIndexRemove.push_back(0);
 
-		if (packetQueue.size() >= packetQueue.front().dataContent[0]) { //if there are enough packets to build an entire message in the queue
+		if (_queue.size() >= _queue.front().dataContent[0]) { //if there are enough packets to build an entire message in the queue
 			//cout << "Enough packets to build message" << endl;
 			byte counter = 1; //keep track of number of packets in message
-			for (int i = 1; i < packetQueue.size(); i++) { 
-				if ((packetQueue[i].packetHeader.messageID == packetQueue.front().packetHeader.messageID)&&(packetQueue[i].packetHeader.sourceService==packetQueue[0].packetHeader.sourceService)&&(packetQueue[i].packetHeader.packetID>counter) ){ //if packets are part of same message
+			for (int i = 1; i < _queue.size(); i++) { 
+				if ((_queue[i].packetHeader.messageID == _queue.front().packetHeader.messageID)&&(_queue[i].packetHeader.sourceService==_queue[0].packetHeader.sourceService)&&(_queue[i].packetHeader.packetID>counter) ){ //if packets are part of same message
 					//cout << "Processing packet:";
-					//cout << hex << int(packetQueue[i].packetHeader.messageID) << endl;
+					//cout << hex << int(_queue[i].packetHeader.messageID) << endl;
 					counter++;
-					messageTrack.push_back(packetQueue[i]); //add potential packet
+					messageTrack.push_back(_queue[i]); //add potential packet
 					packetIndexRemove.push_back(i); //keep track of elements to remove
 				}
 			}
-			if (counter == packetQueue.front().dataContent[0]) { //if all packets that could make up the message are present
+			if (counter == _queue.front().dataContent[0]) { //if all packets that could make up the message are present
 				//cout << "Checking Message ID of packets:" << endl;
 				for (int y = 0; y < messageTrack.size(); y++) {
 
 					//cout << int(packetIndexRemove[y]) << endl;
-					//cout << hex << int(packetQueue[packetIndexRemove[y]].packetHeader.messageID) << endl;
+					//cout << hex << int(_queue[packetIndexRemove[y]].packetHeader.messageID) << endl;
 				}
 				
 				for (int i = packetIndexRemove.size()-1; i >= 0; i--) {
 
 					//cout << int(packetIndexRemove[i]) << endl;
-					//cout << int(packetQueue[packetIndexRemove[i]].packetHeader.messageID) << endl;
-					packetQueue.erase(packetQueue.begin() + packetIndexRemove[i]);
+					//cout << int(_queue[packetIndexRemove[i]].packetHeader.messageID) << endl;
+					_queue.erase(_queue.begin() + packetIndexRemove[i]);
 
 				}
 
 				//cout << hex << "Testing First Packet" << endl;
-				//cout << hex << packetQueue.size() << endl;
-				//cout << hex <<int( packetQueue[0].packetHeader.messageID) <<endl;
-				//cout << hex << int(packetQueue[0].packetHeader.packetID) << endl;
+				//cout << hex << _queue.size() << endl;
+				//cout << hex <<int( _queue[0].packetHeader.messageID) <<endl;
+				//cout << hex << int(_queue[0].packetHeader.packetID) << endl;
 				//cout << "Building Message" << endl;
-
+				
+				Serial.println("returning Build Message");
 
 				return buildMessage(messageTrack); //build the message and return it.
 			}
@@ -65,10 +85,18 @@ Message PacketQueue::checkPacketQueue() {
 	}
 	else {
 		//cout << "Popping Packet" << endl;
+		
+		Serial.println("Something Went wrong, popping packet");
 		popPacket(); //if first packet in queue is not the first packet in message. Something has gone wrong, so pop it.
 	}
-
-	//throw "no_message";
+	Serial.print("No Message found in queue stack");
+	vector<byte> bodyContent;
+	bodyContent.reserve(32);
+	bodyContent.push_back(0x00);
+	
+	Serial.print("Returning EMpty Message");
+	Message* emptyMessage = new Message(0x00,0x00,0x00,0x00,0x00,bodyContent);
+	return *emptyMessage;
 
 }
 

@@ -5,7 +5,7 @@
 #include "Message.h"
 
 #include "PacketHandler.h"
-
+#include "PacketQueue.h"
 
 #ifndef NOARDUINO
 #include "Port.h"
@@ -19,8 +19,10 @@
 #include <vector>
 
 
-extern MessageQueue messageQueue = MessageQueue();
+static PacketQueue packetQueue;
+static MessageQueue messageQueue;
 extern vector<Port> portList;
+
 extern ServiceTable serviceTable;
 extern PacketHandler handle;
 
@@ -29,11 +31,12 @@ class Comms {
 
 
 public:
+	Comms();
 	void sendMessage(Message m);
 
 	void checkMessages();
 
-	void initialiseNode(Port* serials[]);
+	void initialiseNode(std::vector<Port> serials);
 };
 
 #endif

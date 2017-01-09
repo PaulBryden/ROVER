@@ -9,7 +9,7 @@
 class ServiceTable {
 
 private:
-	map<byte, Service*> _table;
+	std::map<byte, Service*> _table;
 
 public:
 	ServiceTable();
@@ -17,7 +17,7 @@ public:
 	Service* getService(byte id);
 	void addService(Service *s);
 	void mergeTable(ServiceTable t);
-	map<byte, Service*> getTable();
+	std::map<byte, Service*> getTable();
 	string toString();
 };
 

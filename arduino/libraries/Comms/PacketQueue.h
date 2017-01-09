@@ -6,8 +6,10 @@
 #include <deque>
 class PacketQueue {
 
+	deque<packet_t> _queue;
 
 public:
+	PacketQueue();
 	void addPacket(packet_t p);
 
 	void popPacket();
