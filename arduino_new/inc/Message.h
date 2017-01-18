@@ -2,7 +2,6 @@
 #define Message_h
 
 #include <Types.h>
-#include <PacketHandler.h>
 #include <iterator>
 #include <vector>
 #include <deque>

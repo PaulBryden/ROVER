@@ -1,11 +1,10 @@
 #ifndef MessageQueue_h
 #define MessageQueue_h
-
+#include <iterator>
+#include <deque>
 #include <Message.h>
-#include <iostream>
 class MessageQueue {
 
-	deque<Message> _queue;
 
 public:
 	void addMessage(Message m);

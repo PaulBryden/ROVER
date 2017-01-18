@@ -37,7 +37,7 @@ int Service::getShortestDistance() {
 			printf("got to here d=-1");
 		fflush(stdout);
 	for (std::map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
-				cout<<_name;
+				//cout<<_name;
 		fflush(stdout);
 		if (d < 0 || it->second < d) {
 

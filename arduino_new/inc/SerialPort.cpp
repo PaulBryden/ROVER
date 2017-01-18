@@ -1,11 +1,12 @@
 
-#include "Port.h"
-#include <HardwareSerial.h>
+#include "SerialPort.h"
 #include "Comms.h"
-#define STARTBYTE '#'
-#define ENDBYTE '+'
 
-Port::Port(int id, HardwareSerial *serial) {
+#define STARTBYTE 0xFE
+#define ENDBYTE 0xFF
+
+HardwareSerial *_serial;
+SerialPort::SerialPort(int id, HardwareSerial *serial) {
 	_id = id;
 	_serial = serial;
 	_start_last = false;
@@ -15,6 +16,7 @@ Port::Port(int id, HardwareSerial *serial) {
 }
 void SerialPort::read() {
 	while (_serial->available() > 0) {
+				Serial.println("Data available");
 		byte b = _serial->read();
 		if (b == STARTBYTE) {
 			if (_start_last) { // byte-stuffed start byte
@@ -25,7 +27,11 @@ void SerialPort::read() {
 			} else if (_end_last) {
 				// packet end
 				packet_t p = getPacketFromBuffer();
-				// send the packet to the packet queue
+				Comms::packetQueue.addPacket(p); //try to add packet to queue, send on if required.
+				//Message newMessage=packetQueue.checkPacketQueue();  
+				//messageQueue.addMessage(newMessage);
+				
+				Serial.println("Message added to queue");
 				_buffer.clear();
 				_packet_start_rcvd = false;
 			} else {
@@ -58,79 +64,9 @@ void SerialPort::read() {
 				_buffer.push_back(b);
 			}
 		}
-=======
-void Port::read() {
-	for(int i=0;i<_buffer.size();i++){
-	Serial.println(_buffer[i]);
->>>>>>> paulb/piPort:arduino/libraries/Comms/Port.cpp
 	}
-  while (_serial->available() > 0) {
-    byte b = _serial->read();
-    _serial->write(b);
-    _serial->println();
-    if (b == STARTBYTE) {
-      if (_start_last) { // byte-stuffed start byte
-        if (_packet_start_rcvd) {
-          _buffer.push_back(b);
-          _start_last = false;
-        }
-      } 
-      else if (_end_last) {
-        if (_packet_start_rcvd) {
-          // packet end
-          packet_t p = getPacketFromBuffer();
-			packetQueue.addPacket(p);
-         	for(int i=0;i<_buffer.size();i++){
-				Serial.println(_buffer[i]);
-			}
-          // send the packet to the packet queue
-          _buffer.clear();
-          _packet_start_rcvd = false;
-        }
-      } 
-      else {
-        _start_last = true;
-      }
-      _end_last = false;
-    } 
-    else if (b == ENDBYTE) {
-      if (_start_last) {
-        _packet_start_rcvd = true;
-        _start_last = false;
-      }
-      if (_end_last) { // byte-stuffed end byte
-        if (_packet_start_rcvd) {
-          _buffer.push_back(b);
-          _end_last = false;
-        }
-      } 
-      else {
-        _end_last = true;
-      }
-      _start_last = false;
-    } 
-    else {
-      if (_start_last) {
-        // start of new packet
-        _serial->println("Start of new packet.");
-        _buffer.clear();
-        _start_last = false;
-        _packet_start_rcvd = true;
-      } 
-      else if (_end_last) {
-        // something went wrong - we have a single end byte
-        _serial->println("Incomplete packet - starting again.");
-        _buffer.clear();
-        _end_last = false;
-        _packet_start_rcvd = false;
-      }
-      if (_packet_start_rcvd) {
-		  Serial.println(b);
-        _buffer.push_back(b);
-      }
-    }
-  }
 }
+
 
 void SerialPort::write(vector<byte> packet) {
     /*std::vector<byte>::const_iterator it;

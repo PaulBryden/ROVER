@@ -1,8 +1,8 @@
 #include <Message.h>
-
-#include <unistd.h>
 #include <stdlib.h>
-#include <cstdio>
+
+
+#include <PacketHandler.h>
 /*
 * NEED TO WORK OUT HOW TO HAVE STRUCTRE BUT NOT POINTING
 * TO THE SAME STRUCTURE EACH TIME, BUT A DIFFERENT ONE
@@ -10,7 +10,7 @@
 
 
 Message::Message(byte messageID, byte targetService, byte sourceService, byte typeOfMessage, byte messageBitfields, vector<byte> bodyContent) {
-	printf("%d",int(targetService));
+	//printf("%d",int(targetService));
 	_messageID = messageID;
 	_targetService = targetService;
 	_sourceService = sourceService;
@@ -61,20 +61,20 @@ void Message::readMessage() {
 	// TODO - implement Message::readMessage
 	if (_typeOfMessage == MT_PASS_ON) {
 		//initate ResourceDiscover and pass on
-		printf("This is an RD message to pass on.\n");
+		//printf("This is an RD message to pass on.\n");
 	}
 	else if (_typeOfMessage == MT_ADVERTISE) {
 		//Advertisement
-		printf("This is an advertise message.\n");
+		//printf("This is an advertise message.\n");
 	}
 	else if (_typeOfMessage == MT_STOP) {
 		//Inititate Resource Discovery and Stop
-		printf("This is a RD message, not to pass on!\n");
+		//printf("This is a RD message, not to pass on!\n");
 	}
 	else {
 		//DEBUG
-		printf("This is not a resource discovery message.\n");
+		//printf("This is not a resource discovery message.\n");
 	}
-	fflush(stdout);
+	//fflush(stdout);
 }
 

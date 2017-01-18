@@ -1,10 +1,11 @@
 #include <MessageQueue.h>
-
+#include <Comms.h>
+static deque<Message> _queue;
 void MessageQueue::addMessage(Message m) {
 	// TODO - implement MessageQueue::addMessage
-	cout <<"adding message to queue\n";
+	/**cout <<"adding message to queue\n";
 	cout <<"message id:";
-	cout << hex <<int(m._messageID);
+	cout << hex <<int(m._messageID);*/
 	_queue.push_back(m);
 }
 
