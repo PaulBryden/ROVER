@@ -5,6 +5,9 @@
 #include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <thread>         // std::thread
+#include <mutex>          // std::mutex
+
 #define PORT 1153
 #define BUFSIZE 128
 
@@ -13,6 +16,7 @@ struct sockaddr_in remaddr;     /* remote address */
 socklen_t addrlen = sizeof(remaddr);            /* length of addresses */
 int recvlen;                    /* # bytes received */
 int fd;                         /* our socket */
+std::mutex mtx;           // mutex for critical section
 
 PortIPAddr::PortIPAddr(int id) {
 	_id = id;
@@ -34,11 +38,15 @@ PortIPAddr::PortIPAddr(int id) {
 }
 
 void PortIPAddr::read() {
+	mtx.lock();
 	recvlen = recvfrom(fd, _buffer.data(), BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
+	mtx.unlock();
 }
 
 void PortIPAddr::write(vector<byte> packet) {
+	mtx.lock();
 	sendto(fd, packet.data(), packet.size(), 0, (struct sockaddr *)&remaddr, addrlen);
+	mtx.unlock();
 }
 
 packet_t PortIPAddr::getPacketFromBuffer() {

@@ -3,10 +3,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <thread>         // std::thread
+#include <mutex>          // std::mutex
 
 #define STARTBYTE 0xFE
 #define ENDBYTE 0xFF
 int fd;
+
+std::mutex mtx;           // mutex for critical section
 PortPi::PortPi(int id) {
 	_id = id;
 	_start_last = false;
@@ -24,6 +28,7 @@ PortPi::PortPi(int id) {
 }
 
 void PortPi::read() {
+	mtx.lock();
 	for(int i=0;i<_buffer.size();i++){
 	
 	}
@@ -100,9 +105,11 @@ void PortPi::read() {
       }
     }
   }
+  mtx.unlock();
 }
 
 void PortPi::write(vector<byte> packet) {
+	mtx.lock();
     /*std::vector<byte>::const_iterator it;
 	for (it = packet.begin(); it != packet.end(); ++it) {
     	_serial->write(*it);
@@ -118,6 +125,7 @@ void PortPi::write(vector<byte> packet) {
 	}
 	 serialPutchar (fd, ENDBYTE) ;
 	 serialPutchar (fd, STARTBYTE) ;
+	 mtx.unlock();
 }
 
 packet_t PortPi::getPacketFromBuffer() {
