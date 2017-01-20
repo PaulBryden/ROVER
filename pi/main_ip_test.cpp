@@ -34,7 +34,18 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  p0.read();
+	vector<byte>  newPacket;
+	newPacket.push_back(0xFE);
+	newPacket.push_back(0x1);
+	newPacket.push_back(0x1);
+	newPacket.push_back(0x1);
+	newPacket.push_back(0x1);
+	newPacket.push_back(0x1);
+	newPacket.push_back(0x1);
+	newPacket.push_back(0x1);
+	newPacket.push_back(0xFF);
+	newPacket.push_back(0xFE);
+  p0.write(newPacket);
 cout <<"Loop";
   usleep(10000);
 }

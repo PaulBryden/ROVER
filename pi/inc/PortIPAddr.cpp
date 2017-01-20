@@ -5,8 +5,9 @@
 #include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <thread>         // std::thread
-#include <mutex>          // std::mutex
+#include <arpa/inet.h>
+//#include <thread>         // std::thread
+//#include <mutex>          // std::mutex
 
 #define PORT 1153
 #define BUFSIZE 128
@@ -16,7 +17,7 @@ struct sockaddr_in remaddr;     /* remote address */
 socklen_t addrlen = sizeof(remaddr);            /* length of addresses */
 int recvlen;                    /* # bytes received */
 int fd;                         /* our socket */
-std::mutex mtx;           // mutex for critical section
+//std::mutex mtx;           // mutex for critical section
 
 PortIPAddr::PortIPAddr(int id) {
 	_id = id;
@@ -28,6 +29,10 @@ PortIPAddr::PortIPAddr(int id) {
         /* bind the socket to any valid IP address and a specific port */
 
         memset((char *)&myaddr, 0, sizeof(myaddr));
+		remaddr.sin_family = AF_INET;
+		remaddr.sin_addr.s_addr = inet_addr("192.168.1.1");
+		remaddr.sin_port = htons(PORT);
+		
         myaddr.sin_family = AF_INET;
         myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
         myaddr.sin_port = htons(PORT);
@@ -38,15 +43,16 @@ PortIPAddr::PortIPAddr(int id) {
 }
 
 void PortIPAddr::read() {
-	mtx.lock();
+	//mtx.lock();
 	recvlen = recvfrom(fd, _buffer.data(), BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
-	mtx.unlock();
+	//mtx.unlock();
 }
 
 void PortIPAddr::write(vector<byte> packet) {
-	mtx.lock();
+	//mtx.lock();
+	printf( "test");
 	sendto(fd, packet.data(), packet.size(), 0, (struct sockaddr *)&remaddr, addrlen);
-	mtx.unlock();
+	//mtx.unlock();
 }
 
 packet_t PortIPAddr::getPacketFromBuffer() {
