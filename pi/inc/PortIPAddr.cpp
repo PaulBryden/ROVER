@@ -30,7 +30,7 @@ PortIPAddr::PortIPAddr(int id) {
 
         memset((char *)&myaddr, 0, sizeof(myaddr));
 		remaddr.sin_family = AF_INET;
-		remaddr.sin_addr.s_addr = inet_addr("192.168.1.1");
+		remaddr.sin_addr.s_addr = inet_addr("169.254.4.43");
 		remaddr.sin_port = htons(PORT);
 		
         myaddr.sin_family = AF_INET;
