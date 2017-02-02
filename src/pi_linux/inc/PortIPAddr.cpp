@@ -6,6 +6,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <thread>         // std::thread
+#include <mutex>          // std::mutex
 #define PORT 1153
 #define BUFSIZE 128
 #define STARTBYTE 0xFE
@@ -16,6 +18,7 @@ socklen_t addrlen = sizeof(remaddr);            /* length of addresses */
 int recvlen;                    /* # bytes received */
 int fd;                         /* our socket */
 
+std::mutex mtx;           // mutex for critical section
 PortIPAddr::PortIPAddr(int id) {
 	_id = id;
 	_start_last = false;
@@ -43,6 +46,7 @@ PortIPAddr::PortIPAddr(int id) {
 }
 
 void PortIPAddr::read() {
+	mtx.lock();
 	//recvlen = recvfrom(fd, tempBuffer, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
 	char buffer[549];
 	struct sockaddr_storage src_addr;
@@ -58,6 +62,7 @@ void PortIPAddr::read() {
     			std::cout << std::hex << (int)buffer[i];
 	}
 	handleData(&buffer[0],(int)count);
+  mtx.unlock();
 }
 
 void PortIPAddr::handleData(char *buffer,int dataSize) {
