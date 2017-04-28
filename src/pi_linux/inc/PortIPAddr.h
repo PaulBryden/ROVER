@@ -12,7 +12,7 @@ class PortIPAddr : public Port {
 public:
 	 PortIPAddr(int id);
 	void read();
-
+	void handleData(char *data, int dataSize);
 	void write(vector<byte> serializedPacket);
 
 	packet_t getPacketFromBuffer();
