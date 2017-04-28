@@ -25,8 +25,8 @@ public:
 	string getName();
 	int getOutgoingPort();
 	int getShortestDistance();
-	int getShortestDistancePort();
 	void setPortDistance(int port, int distance);
+	void flagPort(int port);
 	std::map<int, int> getPortMap();
 };
 

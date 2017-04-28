@@ -16,7 +16,7 @@ void PacketQueue::addPacket(packet_t p) {
 		
 		printf("about to send packet back");
 		PacketHandler newPacketHandler;
-		int shortestDistancePort=((serviceTable.getService(p.packetHeader.targetService))->getShortestDistancePort());
+		int shortestDistancePort=((serviceTable.getService(p.packetHeader.targetService))->getOutgoingPort());
 			if(shortestDistancePort>=portList.size()){
 				//SOmething has gone wrong, we dont have a map to this port ABORT ABORT!!!
 				cout <<"Error, port not mapped in list. Bad user configuration\n";
